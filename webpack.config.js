@@ -25,9 +25,10 @@ module.exports = {
       {
         test: /\.(png|svg|jpe?g|gif)$/,
         use: {
-          loader: 'file-loader',
+          loader: 'url-loader',
           options: {
-            name: "./images/[hash].[ext]",
+            outputPath: 'images',
+            limit: 1000,
           },
         },
       }
@@ -37,5 +38,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html"
     })
-  ]
+  ],
+  node: {
+    fs: 'empty',
+    vm: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  }
 };
