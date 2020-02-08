@@ -5,11 +5,15 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: path.join(__dirname, "/dist"),
+    publicPath: '/'
   },
   devtool: "source-map",
   resolve: {
     modules: ["src", "node_modules"],
     extensions: [".ts", ".tsx", ".js"]
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   module: {
     rules: [
