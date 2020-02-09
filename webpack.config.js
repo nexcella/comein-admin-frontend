@@ -2,13 +2,20 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dotenv = require('dotenv');
-
+const pkg = require('./package.json');
 module.exports = () => {
   const env = dotenv.config().parsed;
 
-  const envKeys = {};
+  const envKeys = {
+    'process.env.PKG_VERSION': JSON.stringify(pkg.version)
+  };
   for (const key in env) {
     envKeys[`process.env.${key}`] = JSON.stringify(env[key]);
+  }
+  for (const key in process.env) {
+    if (key.indexOf('APP_') === 0) {
+      envKeys[`process.env.${key}`] = JSON.stringify(process.env[key]);
+    }
   }
 
   console.debug({envKeys});
