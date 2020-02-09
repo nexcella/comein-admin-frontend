@@ -15,7 +15,7 @@ class Logger {
   private logData: LogMessage[] = [];
 
   public getLogs() {
-    return this.logData.map(this.formatMessage);
+    return this.logData.map((log, index) => this.formatMessage(log, true, index));
   }
 
   public debug = (message: string, ...context: any[]) => {
@@ -43,12 +43,15 @@ class Logger {
     this.printMessage(logMessage);
   };
 
-  private formatMessage = ({date, level, message, context}: LogMessage, index?: number) => {
+  private formatMessage = ({date, level, message, context}: LogMessage, needAdditionalInfo = true, index?: number,) => {
     let loggedDate = date;
     if (index > 0) {
       loggedDate = window.performance.now();
     }
-    let formatMessage = `[${loggedDate}] ${[level]}: ${message}`;
+    let formatMessage = `${message}`;
+    if (needAdditionalInfo) {
+      formatMessage = `[${loggedDate}] ${[level]}: ${formatMessage}`;
+    }
     if (context.length > 0) {
       let serializedContext = '';
       try {
@@ -66,7 +69,7 @@ class Logger {
     if (logLevelMap.indexOf(logMessage.level) < logLevelMap.indexOf(this.config.logLevel)) {
       return;
     }
-    const formattedMessage = this.formatMessage(logMessage);
+    const formattedMessage = this.formatMessage(logMessage, false);
     switch (logMessage.level) {
       case LOG_LEVEL.DEBUG:
         console.debug(formattedMessage);
