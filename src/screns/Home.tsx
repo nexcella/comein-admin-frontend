@@ -1,5 +1,5 @@
 import React from "react";
-import {useVersion} from "./providers/VersionProvider";
+import {useVersion} from "../providers/VersionProvider";
 
 export function Home() {
   const version = useVersion();
