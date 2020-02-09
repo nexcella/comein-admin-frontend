@@ -6,6 +6,7 @@ export function Home() {
   return (
     <>
       <div>Home</div>
+
       <div>Version: {version}</div>
     </>
   )

@@ -1,0 +1,87 @@
+import {LOG_LEVEL, LoggerConfig, loggerConfig} from "../config/logger";
+
+type LogMessage = {
+  date: number,
+  level: LOG_LEVEL,
+  message: string,
+  context?: any[]
+}
+
+class Logger {
+  constructor(private config: LoggerConfig) {
+    console.debug({config});
+  }
+
+  private logData: LogMessage[] = [];
+
+  public getLogs() {
+    return this.logData.map(this.formatMessage);
+  }
+
+  public debug = (message: string, ...context: any[]) => {
+    this.storeMessage(LOG_LEVEL.DEBUG, message, context);
+  };
+
+  public info = (message: string, ...context: any[]) => {
+    this.storeMessage(LOG_LEVEL.INFO, message, context);
+  };
+  public warn = (message: string, ...context: any[]) => {
+    this.storeMessage(LOG_LEVEL.WARN, message, context);
+  };
+  public error = (message: string, ...context: any[]) => {
+    this.storeMessage(LOG_LEVEL.ERROR, message, context);
+  };
+
+  private storeMessage = (level: LOG_LEVEL, message: string, context: any[]) => {
+    const logMessage: LogMessage = {
+      date: new Date().getTime(),
+      level,
+      message,
+      context
+    };
+    this.logData.push(logMessage);
+    this.printMessage(logMessage);
+  };
+
+  private formatMessage = ({date, level, message, context}: LogMessage, index?: number) => {
+    let loggedDate = date;
+    if (index > 0) {
+      loggedDate = window.performance.now();
+    }
+    let formatMessage = `[${loggedDate}] ${[level]}: ${message}`;
+    if (context.length > 0) {
+      let serializedContext = '';
+      try {
+        serializedContext = JSON.stringify(context);
+      } catch (e) {
+        serializedContext = `wrong context - ${e.message}`;
+      }
+      formatMessage += ` / ${JSON.stringify(serializedContext)}`;
+    }
+    return formatMessage;
+  };
+
+  private printMessage(logMessage: LogMessage) {
+    const logLevelMap = Object.keys(LOG_LEVEL);
+    if (logLevelMap.indexOf(logMessage.level) < logLevelMap.indexOf(this.config.logLevel)) {
+      return;
+    }
+    const formattedMessage = this.formatMessage(logMessage);
+    switch (logMessage.level) {
+      case LOG_LEVEL.DEBUG:
+        console.debug(formattedMessage);
+        break;
+      case LOG_LEVEL.INFO:
+        console.info(formattedMessage);
+        break;
+      case LOG_LEVEL.WARN:
+        console.warn(formattedMessage);
+        break;
+      case LOG_LEVEL.ERROR:
+        console.error(formattedMessage);
+        break;
+    }
+  }
+}
+
+export const logger = new Logger(loggerConfig);

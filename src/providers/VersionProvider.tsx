@@ -1,8 +1,8 @@
-import React, {ReactNode, useContext} from "react";
+import React, {createContext, ReactNode, useContext} from "react";
 import {getVersion} from "../utils/version";
 
 const version = getVersion();
-const VersionContext = React.createContext(version);
+const VersionContext = createContext(version);
 
 export function VersionProvider({children}: { children: ReactNode }) {
   return (
