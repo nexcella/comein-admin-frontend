@@ -9,7 +9,6 @@ type LogMessage = {
 
 class Logger {
   constructor(private config: LoggerConfig) {
-    console.debug({config});
   }
 
   private logData: LogMessage[] = [];
