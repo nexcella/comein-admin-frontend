@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "tsc -p ."
   },
   "dependencies": {
     "mobx": "5.15.4",
