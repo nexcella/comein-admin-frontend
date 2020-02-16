@@ -1,28 +1,24 @@
 import React, {ReactNode} from 'react';
-import {Auth} from "./screns/Auth";
-import {Home} from "./screns/Home";
+import {inject, observer} from "mobx-react";
 import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
 
-function ProtectedRoute({children, path}: { children: ReactNode, path: string }) {
-  const a = true;
-  return (
-    <Route
-      path={path}
-      render={({location}) =>
-        a ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/auth",
-              state: {from: location}
-            }}
+import {Auth} from "./screns/Auth";
+import {Home} from "./screns/Home";
+import {AuthStore} from "./stores/AuthStore";
+
+const ProtectedRoute = inject("authStore")(
+  observer(({children, path, authStore}: { children: ReactNode, path: string, authStore?: AuthStore }) => {
+    return (
+      <Route
+        path={path}
+        render={({location}) => authStore.isLoggedIn ? (children) : (
+          <Redirect to={{pathname: "/auth", state: {from: location}}}
           />
-        )
-      }
-    />
-  )
-}
+        )}
+      />
+    )
+  })
+);
 
 export function Router() {
   return (

@@ -4,6 +4,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "esModuleInterop": true,
     "module": "commonjs",
     "target": "es6",
