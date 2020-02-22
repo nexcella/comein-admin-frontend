@@ -14,6 +14,7 @@
     "test": "tsc -p ."
   },
   "dependencies": {
+    "axios": "0.19.2",
     "mobx": "5.15.4",
     "mobx-react": "6.1.7",
     "react": "16.12.0",
