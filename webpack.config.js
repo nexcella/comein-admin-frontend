@@ -18,8 +18,6 @@ module.exports = () => {
     }
   }
 
-  console.debug({envKeys});
-
   return {
     entry: "./src/index.tsx",
     output: {
