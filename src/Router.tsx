@@ -5,7 +5,7 @@ import {observer} from "mobx-react";
 import {Auth} from "./screens/Auth";
 import {Home} from "./screens/Home";
 import {logger} from "./utils/logger";
-import {useIsLoggedIn} from "./components/auth/AuthProvider";
+import {useAuthState} from "./components/auth/AuthProvider";
 
 interface ProtectedRouteProps {
   children: ReactNode,
@@ -13,7 +13,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
-  const isLoggedIn = useIsLoggedIn();
+  const {isLoggedIn} = useAuthState();
   return (
     <Route
       path={path}

@@ -1,15 +1,19 @@
 import React from "react";
-import {Provider as MobXReactProvider} from "mobx-react";
+import {MobXProviderContext} from "mobx-react";
 import {AuthStore} from "./AuthStore";
 
 const stores = {
   authStore: new AuthStore()
 }
 
+export function useStores() {
+  return React.useContext(MobXProviderContext)
+}
+
 export function StoreProvider({children}: { children: React.ReactNode }) {
   return (
-    <MobXReactProvider {...stores}>
+    <MobXProviderContext.Provider value={stores}>
       {children}
-    </MobXReactProvider>
+    </MobXProviderContext.Provider>
   )
 }

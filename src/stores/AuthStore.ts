@@ -15,8 +15,8 @@ export class AuthStore {
   @observable isLoggedIn = false;
   @observable isLoading = false;
 
-  @observable token: string
-  @observable authData: AuthData;
+  @observable token?: string
+  @observable authData?: AuthData;
 
   private readonly authService: AuthService;
 
@@ -24,18 +24,20 @@ export class AuthStore {
     this.authService = authService;
   }
 
-  @action login({username, password}: LoginData) {
+  @action.bound
+  login({username, password}: LoginData) {
     this.isLoading = true;
     this.authService.login(username, password)
       .then((data) => {
         this.isLoggedIn = true;
         this.isLoading = false;
-        this.authData = data;
+        this.authData = data as AuthData;
         logger.debug('login success');
       });
   }
 
-  @action logout() {
+  @action.bound
+  logout() {
     this.isLoggedIn = false;
     this.isLoading = false;
     this.authData = undefined;
