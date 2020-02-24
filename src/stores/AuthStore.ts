@@ -3,6 +3,8 @@ import {action, observable} from 'mobx';
 import {logger} from "../utils/logger";
 import authService, {AuthService} from "../services/AuthService";
 
+export const AuthStoreKey = 'authStore';
+
 export type AuthData = {}
 export type LoginData = {
   username: string,
@@ -24,18 +26,19 @@ export class AuthStore {
 
   @action login({username, password}: LoginData) {
     this.isLoading = true;
-    this.isLoggedIn = true;
-    logger.debug('login success');
     this.authService.login(username, password)
       .then((data) => {
+        this.isLoggedIn = true;
         this.isLoading = false;
         this.authData = data;
+        logger.debug('login success');
       });
   }
 
   @action logout() {
     this.isLoggedIn = false;
     this.isLoading = false;
+    this.authData = undefined;
     logger.debug('logout');
   }
 

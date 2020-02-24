@@ -3,6 +3,7 @@
     "outDir": "dist/",
     "sourceMap": true,
     "noImplicitAny": true,
+    "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,

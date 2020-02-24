@@ -1,34 +1,32 @@
 import React, {ReactNode} from 'react';
-import {inject, observer} from "mobx-react";
 import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
+import {observer} from "mobx-react";
 
 import {Auth} from "./screens/Auth";
 import {Home} from "./screens/Home";
-import {AuthStore} from "./stores/AuthStore";
 import {logger} from "./utils/logger";
+import {useIsLoggedIn} from "./components/auth/AuthProvider";
 
 interface ProtectedRouteProps {
   children: ReactNode,
   path: string,
-  authStore?: AuthStore
 }
 
-const ProtectedRoute = inject("authStore")(
-  observer(({children, path, authStore: {isLoggedIn}}: ProtectedRouteProps) => {
-    return (
-      <Route
-        path={path}
-        render={({location}) => {
-          if (isLoggedIn) {
-            return children
-          }
-          logger.debug(`Access denied: ${path}. Redirect to: /auth`);
-          return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
-        }}
-      />
-    )
-  })
-);
+const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
+  const isLoggedIn = useIsLoggedIn();
+  return (
+    <Route
+      path={path}
+      render={({location}) => {
+        if (isLoggedIn) {
+          return children
+        }
+        logger.debug(`Access denied: ${path}. Redirect to: /auth`);
+        return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
+      }}
+    />
+  )
+});
 
 export function Router() {
   return (
