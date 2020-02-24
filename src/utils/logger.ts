@@ -44,14 +44,14 @@ class Logger {
 
   private formatMessage = ({date, level, message, context}: LogMessage, needAdditionalInfo = true, index?: number,) => {
     let loggedDate = date;
-    if (index > 0) {
+    if (index && index > 0) {
       loggedDate = window.performance.now();
     }
     let formatMessage = `${message}`;
     if (needAdditionalInfo) {
       formatMessage = `[${loggedDate}] ${[level]}: ${formatMessage}`;
     }
-    if (context.length > 0) {
+    if (context && context.length > 0) {
       let serializedContext = '';
       try {
         serializedContext = JSON.stringify(context);

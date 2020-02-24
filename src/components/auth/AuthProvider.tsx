@@ -1,20 +1,34 @@
 import React, {useContext} from "react";
-import {inject, observer} from "mobx-react";
+import {useObserver} from 'mobx-react';
 
 import {AuthStore, AuthStoreKey} from "../../stores/AuthStore";
+import {useStores} from "../../stores/StoreProvider";
 
-export const AuthContext = React.createContext<AuthStore>(new AuthStore());
+const AuthContext = React.createContext<AuthStore | undefined>(undefined);
 
-export function useIsLoggedIn() {
+export function useAuthState() {
   const authStore = useContext(AuthContext);
-  return authStore.isLoggedIn;
+  if (!authStore) {
+    throw new Error('Incorrect useAuthState usage');
+  }
+  return useObserver(() => ({
+    isLoggedIn: authStore.isLoggedIn,
+    isLoading: authStore.isLoading
+  }));
 }
 
-export function useLogout() {
+export function useAuthActions() {
   const authStore = useContext(AuthContext);
-  return () => authStore.logout();
+  if (!authStore) {
+    throw new Error('Incorrect authActions usage');
+  }
+  return {
+    login: authStore.login,
+    logout: authStore.logout
+  }
 }
 
-export const AuthProvider = inject(AuthStoreKey)(observer((props: any) => {
-  return <AuthContext.Provider value={props[AuthStoreKey]}>{props.children}</AuthContext.Provider>
-}));
+export const AuthProvider = (props: any) => {
+  const stores = useStores();
+  return <AuthContext.Provider value={stores[AuthStoreKey]}>{props.children}</AuthContext.Provider>
+};
