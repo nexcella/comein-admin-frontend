@@ -2,20 +2,30 @@ import {action, observable} from 'mobx';
 
 import {logger} from "../utils/logger";
 import authService, {AuthService} from "../services/AuthService";
+import {format, ignore} from "mobx-sync";
 
 export const AuthStoreKey = 'authStore';
 
-export type AuthData = {}
+export type AuthData = {
+  token: string
+}
 export type LoginData = {
   username: string,
   password: string
 }
 
 export class AuthStore {
-  @observable isLoggedIn = false;
+  @ignore
   @observable isLoading = false;
 
+  @observable isLoggedIn = false;
+
+  @format(
+    (hash) => atob(hash),
+    (token: string) => btoa(token)
+  )
   @observable token?: string
+
   @observable authData?: AuthData;
 
   private readonly authService: AuthService;
@@ -27,11 +37,12 @@ export class AuthStore {
   @action.bound
   login({username, password}: LoginData) {
     this.isLoading = true;
-    this.authService.login(username, password)
+    this.authService.login<AuthData>(username, password)
       .then((data) => {
         this.isLoggedIn = true;
         this.isLoading = false;
-        this.authData = data as AuthData;
+        this.authData = data;
+        this.token = data.token;
         logger.debug('login success');
       });
   }
