@@ -1,28 +1,32 @@
 import React, {ReactNode} from 'react';
-import {Auth} from "./screns/Auth";
-import {Home} from "./screns/Home";
 import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
+import {observer} from "mobx-react";
 
-function ProtectedRoute({children, path}: { children: ReactNode, path: string }) {
-  const a = true;
+import {Auth} from "./screens/Auth";
+import {Home} from "./screens/Home";
+import {logger} from "./utils/logger";
+import {useAuthState} from "./components/auth/AuthProvider";
+
+interface ProtectedRouteProps {
+  children: ReactNode,
+  path: string,
+}
+
+const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
+  const {isLoggedIn} = useAuthState();
   return (
     <Route
       path={path}
-      render={({location}) =>
-        a ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/auth",
-              state: {from: location}
-            }}
-          />
-        )
-      }
+      render={({location}) => {
+        if (isLoggedIn) {
+          return children
+        }
+        logger.debug(`Access denied: ${path}. Redirect to: /auth`);
+        return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
+      }}
     />
   )
-}
+});
 
 export function Router() {
   return (

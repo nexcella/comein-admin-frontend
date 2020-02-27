@@ -10,13 +10,16 @@
   ],
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "tsc -p ."
   },
   "dependencies": {
+    "axios": "0.19.2",
     "mobx": "5.15.4",
     "mobx-react": "6.1.7",
     "react": "16.12.0",
     "react-dom": "16.12.0",
+    "react-hook-form": "4.9.4",
     "react-router-dom": "5.1.2",
     "typescript": "3.7.5",
     "webpack": "4.41.5"
