@@ -1,8 +1,8 @@
 export class AuthService {
 
-  login(username: string, password: string) {
+  login<T>(username: string, password: string): Promise<T> {
     return new Promise((resolve, reject) => {
-      setTimeout(() => resolve({token: '123123'}), 5000);
+      setTimeout(() => resolve({token: '123123'} as unknown as T), 5000);
     });
   }
 
