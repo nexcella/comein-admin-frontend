@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {useObserver} from 'mobx-react';
 
 import {AuthStore, AuthStoreKey} from "../../stores/AuthStore";
-import {useStores} from "../../stores/StoreProvider";
+import {useStore} from "../../stores/StoreProvider";
 
 const AuthContext = React.createContext<AuthStore | undefined>(undefined);
 
@@ -20,7 +20,7 @@ export function useAuthState() {
 export function useAuthActions() {
   const authStore = useContext(AuthContext);
   if (!authStore) {
-    throw new Error('Incorrect authActions usage');
+    throw new Error('Incorrect useAuthActions usage');
   }
   return {
     login: authStore.login,
@@ -29,6 +29,6 @@ export function useAuthActions() {
 }
 
 export const AuthProvider = (props: any) => {
-  const stores = useStores();
-  return <AuthContext.Provider value={stores[AuthStoreKey]}>{props.children}</AuthContext.Provider>
+  const store = useStore();
+  return <AuthContext.Provider value={store[AuthStoreKey]}>{props.children}</AuthContext.Provider>
 };

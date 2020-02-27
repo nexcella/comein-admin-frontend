@@ -27,7 +27,7 @@ module.exports = () => {
     devtool: "source-map",
     resolve: {
       modules: ["src", "node_modules"],
-      extensions: [".ts", ".tsx", ".js"]
+      extensions: [".ts", ".tsx", ".js", '.mjs']
     },
     devServer: {
       historyApiFallback: true,
@@ -52,6 +52,11 @@ module.exports = () => {
               limit: 1000,
             },
           },
+        },
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: 'javascript/auto'
         }
       ]
     },
