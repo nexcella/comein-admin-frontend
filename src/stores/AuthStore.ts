@@ -2,6 +2,7 @@ import {action, observable} from 'mobx';
 
 import {logger} from "../utils/logger";
 import authService, {AuthService} from "../services/AuthService";
+import {ignore} from "mobx-sync";
 
 export const AuthStoreKey = 'authStore';
 
@@ -12,9 +13,10 @@ export type LoginData = {
 }
 
 export class AuthStore {
-  @observable isLoggedIn = false;
+  @ignore
   @observable isLoading = false;
 
+  @observable isLoggedIn = false;
   @observable token?: string
   @observable authData?: AuthData;
 
