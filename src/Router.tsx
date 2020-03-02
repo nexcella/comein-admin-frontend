@@ -34,7 +34,6 @@ export function Router() {
       <Switch>
         <Route path='/auth'>
           <Auth/>
-          <NavLink to={'/'}>Home -> </NavLink>
         </Route>
         <ProtectedRoute path='/'>
           <Home/>
