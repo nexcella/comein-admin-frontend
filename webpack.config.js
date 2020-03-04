@@ -1,8 +1,14 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const dotenv = require('dotenv');
 const pkg = require('./package.json');
+
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = () => {
   const env = dotenv.config().parsed;
 
@@ -18,13 +24,39 @@ module.exports = () => {
     }
   }
 
+  const plugins = [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html"
+    }),
+    new webpack.DefinePlugin(envKeys)
+  ];
+
+  if (isProduction) {
+    plugins.push(new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
+    }));
+  }
+
+
   return {
     entry: "./src/index.tsx",
+    mode: isProduction ? 'production' : 'development',
     output: {
       path: path.join(__dirname, "/dist"),
-      publicPath: '/'
+      publicPath: '/',
+      filename: "[name].[hash].js"
     },
-    devtool: "source-map",
+    devtool: isProduction ? false : "source-map",
+    optimization: {
+      minimizer: isProduction ? [
+        new TerserJSPlugin(),
+        new OptimizeCSSAssetsPlugin(),
+      ] : [],
+      splitChunks: {
+        chunks: "all"
+      }
+    },
     resolve: {
       modules: ["src", "node_modules"],
       extensions: [".ts", ".tsx", ".js", '.mjs']
@@ -39,8 +71,15 @@ module.exports = () => {
           exclude: /node_modules/,
           use: [
             {
-              loader: "ts-loader"
-            }
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true
+              }
+            },
+            {
+              loader: 'astroturf/loader',
+              options: {enableCssProp: true},
+            },
           ]
         },
         {
@@ -54,18 +93,21 @@ module.exports = () => {
           },
         },
         {
+          test: /\.css$/,
+          use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'astroturf/css-loader'],
+        },
+        {
+          test: /\.scss$/,
+          use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'astroturf/css-loader', 'sass-loader'],
+        },
+        {
           test: /\.mjs$/,
           include: /node_modules/,
           type: 'javascript/auto'
         }
       ]
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: "./public/index.html"
-      }),
-      new webpack.DefinePlugin(envKeys)
-    ],
+    plugins,
     node: {
       fs: 'empty',
       vm: 'empty',
