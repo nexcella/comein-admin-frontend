@@ -7,8 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const dotenv = require('dotenv');
 const pkg = require('./package.json');
 
-const env = (process.env.NODE_ENV === 'production') ? 'production' : 'development';
-const isProduction = env === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = () => {
   const env = dotenv.config().parsed;
