@@ -1,9 +1,13 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 import {Redirect} from "react-router-dom"
+import {reaction} from "mobx";
+import styled from "astroturf";
+import {useTranslation} from "react-i18next";
+
 import {useAuthActions, useAuthState} from "../components/auth/AuthProvider";
 import {Logo} from "../components/logo/Logo";
-import styled from "astroturf";
+import {useAppStore} from "../stores/StoreProvider";
 
 const AuthWrapper = styled.div`
   margin: 0 auto;
@@ -44,8 +48,12 @@ const FormWrapper = styled.form`
 
 export const Auth = () => {
   const authState = useAuthState();
+  const appStore = useAppStore();
   const authActions = useAuthActions();
   const {register, handleSubmit} = useForm();
+
+  const {t, i18n} = useTranslation();
+
   const onSubmit = handleSubmit(({username, password}) => {
     authActions.login({username, password});
   });
@@ -54,16 +62,23 @@ export const Auth = () => {
     return <Redirect to="/"/>
   }
 
+  reaction(
+    () => appStore.locale,
+    locale => {
+      console.debug('locale!', locale);
+      i18n.changeLanguage(locale);
+    }
+  );
+
   return (
     <AuthWrapper>
-      {authState.isLoading && <p>Loading...</p>}
-      <div>Auth</div>
       <Logo/>
       <Subtitle>личный кабинет организатора</Subtitle>
       <FormWrapper onSubmit={onSubmit}>
         <input type="text" ref={register} name='username' autoComplete='username' placeholder='Логин'/>
         <input type="password" ref={register} name='password' autoComplete='current-password' placeholder='Пароль'/>
-        <button type='submit'>Войти</button>
+        <button type='submit' disabled={authState.isLoading}>{t('button.login')}</button>
+        <button onClick={() => appStore.setLocale('en-EN')}>change locale</button>
       </FormWrapper>
     </AuthWrapper>
   );
