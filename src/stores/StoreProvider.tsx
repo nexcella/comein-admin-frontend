@@ -1,13 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {MobXProviderContext, observer} from "mobx-react";
+import {reaction} from "mobx";
 
 import {store} from "./RootStore";
 import {initStorage} from "./initStore";
+import i18n from "../i18n";
+import {AppStore, AppStoreKey} from "./AppStore";
 
 const SHOW_LOADER_TIMEOUT = 200;
 
 export function useStore() {
   return React.useContext(MobXProviderContext)
+}
+
+export function useAppStore(): AppStore {
+  return React.useContext(MobXProviderContext)[AppStoreKey];
 }
 
 initStorage();
