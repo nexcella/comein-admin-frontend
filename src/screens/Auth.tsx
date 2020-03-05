@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {Redirect} from "react-router-dom"
 import {reaction} from "mobx";
@@ -8,6 +8,7 @@ import {useTranslation} from "react-i18next";
 import {useAuthActions, useAuthState} from "../components/auth/AuthProvider";
 import {Logo} from "../components/logo/Logo";
 import {useAppStore} from "../stores/StoreProvider";
+import {logger} from "../utils/logger";
 
 const AuthWrapper = styled.div`
   margin: 0 auto;
@@ -62,10 +63,15 @@ export const Auth = () => {
     return <Redirect to="/"/>
   }
 
+  useEffect(() => {
+    logger.debug(`App locale: ${appStore.locale}`);
+    i18n.changeLanguage(appStore.locale)
+  }, [])
+
   reaction(
     () => appStore.locale,
     locale => {
-      console.debug('locale!', locale);
+      logger.debug(`Change locale: ${locale}`);
       i18n.changeLanguage(locale);
     }
   );
@@ -78,7 +84,6 @@ export const Auth = () => {
         <input type="text" ref={register} name='username' autoComplete='username' placeholder='Логин'/>
         <input type="password" ref={register} name='password' autoComplete='current-password' placeholder='Пароль'/>
         <button type='submit' disabled={authState.isLoading}>{t('button.login')}</button>
-        <button onClick={() => appStore.setLocale('en-EN')}>change locale</button>
       </FormWrapper>
     </AuthWrapper>
   );
