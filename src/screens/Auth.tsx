@@ -59,10 +59,7 @@ export const Auth = () => {
     authActions.login({username, password});
   });
 
-  if (authState.isLoggedIn) {
-    return <Redirect to="/"/>
-  }
-
+  // @TODO move to locale switcher component
   useEffect(() => {
     logger.debug(`App locale: ${appStore.locale}`);
     i18n.changeLanguage(appStore.locale)
@@ -76,6 +73,11 @@ export const Auth = () => {
     }
   );
 
+
+  if (authState.isLoggedIn) {
+    return <Redirect to="/"/>
+  }
+
   return (
     <AuthWrapper>
       <Logo/>
@@ -85,6 +87,7 @@ export const Auth = () => {
         <input type="password" ref={register} name='password' autoComplete='current-password' placeholder='Пароль'/>
         <button type='submit' disabled={authState.isLoading}>{t('button.login')}</button>
       </FormWrapper>
+      <button onClick={() => console.debug(logger.getLogs())}>Get logs</button>
     </AuthWrapper>
   );
 };
