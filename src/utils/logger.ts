@@ -1,4 +1,16 @@
-import {LOG_LEVEL, LoggerConfig, loggerConfig} from "../config/logger";
+import {loggerConfig} from "../config/logger";
+
+export type LoggerConfig = {
+  logLevel: LOG_LEVEL,
+}
+
+export enum LOG_LEVEL {
+  DEBUG = 'DEBUG',
+  INFO = 'INFO',
+  WARN = 'WARN',
+  ERROR = 'ERROR',
+  NONE = 'NONE'
+}
 
 type LogMessage = {
   date: number,

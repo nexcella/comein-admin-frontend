@@ -1,16 +1,12 @@
 import {AuthStore, AuthStoreKey} from "./AuthStore";
 import {ignore} from "mobx-sync";
 import {action, observable} from "mobx";
-import {observer} from "mobx-react";
+import {AppStore, AppStoreKey} from "./AppStore";
 
 export class RootStore {
-  /**
-   * @desc ignore node, this node will not be persisted, and its changes
-   * will not trigger persist event.
-   * @type {boolean}
-   */
   @ignore @observable storeLoaded = false;
   [AuthStoreKey] = new AuthStore();
+  [AppStoreKey] = new AppStore();
 
   @action setStoreLoaded() {
     this.storeLoaded = true;

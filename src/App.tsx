@@ -6,6 +6,8 @@ import {Router} from "./Router";
 import {StoreProvider} from "./stores/StoreProvider";
 import {AuthProvider} from "./components/auth/AuthProvider";
 
+import './i18n';
+
 const styles = css`
   @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&display=swap&subset=cyrillic,cyrillic-ext');
   @import '../public/reset.scss';
@@ -17,7 +19,6 @@ export function App() {
     <VersionProvider css={styles}>
       <StoreProvider>
         <AuthProvider>
-          App
           <Router/>
         </AuthProvider>
       </StoreProvider>
