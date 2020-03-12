@@ -87,7 +87,6 @@ export const Auth = () => {
         <input type="password" ref={register} name='password' autoComplete='current-password' placeholder='Пароль'/>
         <button type='submit' disabled={authState.isLoading}>{t('button.login')}</button>
       </FormWrapper>
-      <button onClick={() => console.debug(logger.getLogs())}>Get logs</button>
     </AuthWrapper>
   );
 };
