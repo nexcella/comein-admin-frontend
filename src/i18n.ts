@@ -14,13 +14,21 @@ i18n
         'translation': {
           'button': {
             login: 'Войти'
+          },
+          label: {
+            'username': 'Логин',
+            'password': 'Пароль'
           }
         }
       },
       'en-EN': {
         'translation': {
           'button': {
-            login: 'Login'
+            login: 'Sign In'
+          },
+          label: {
+            'username': 'Username',
+            'password': 'Password'
           }
         }
       }
