@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect} from 'react';
 import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
 import {observer} from "mobx-react";
 
@@ -6,6 +6,9 @@ import {Auth} from "./screens/Auth";
 import {Home} from "./screens/Home";
 import {logger} from "./utils/logger";
 import {useAuthState} from "./components/auth/AuthProvider";
+import {reaction} from "mobx";
+import {useAppStore} from "./stores/StoreProvider";
+import {useTranslation} from "react-i18next";
 
 interface ProtectedRouteProps {
   children: ReactNode,
@@ -29,6 +32,24 @@ const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
 });
 
 export function Router() {
+  const appStore = useAppStore();
+  const {i18n} = useTranslation();
+
+  useEffect(() => {
+    logger.debug(`App locale: ${appStore.locale}`);
+    i18n.changeLanguage(appStore.locale)
+  }, [])
+
+  reaction(
+    () => appStore.locale,
+    locale => {
+      i18n.changeLanguage(locale).then(() => {
+        logger.debug(`Change locale: ${locale}`);
+      });
+    }
+  );
+
+
   return (
     <BrowserRouter>
       <Switch>
