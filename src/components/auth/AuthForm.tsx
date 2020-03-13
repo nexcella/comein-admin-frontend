@@ -6,28 +6,27 @@ import {useAuthActions, useAuthState} from "./AuthProvider";
 import {LoginData} from "../../stores/AuthStore";
 import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
+import {Button} from "../ui-kit/Button";
 
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  & input {
-    
-  }
   & button {
-    margin-top: 20px;
+    margin-top: 35px;
   }
 `
-
-const validationSchema = yupObject().shape({
-  username: yupString().required('t.validation.required'),
-  password: yupString().required('t.validation.required').min(6),
-});
 
 export function AuthForm() {
   const authState = useAuthState();
   const authActions = useAuthActions();
   const {t} = useTranslation();
+
+  const validationSchema = yupObject().shape({
+    username: yupString().required(t('validation.required')),
+    password: yupString().required(t('validation.required'))
+  });
+
   const formik = useFormik<LoginData>({
     validationSchema,
     initialValues: {
@@ -38,6 +37,8 @@ export function AuthForm() {
       authActions.login({username, password});
     }
   });
+
+  const isLoading = formik.isSubmitting && authState.isLoading;
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
@@ -60,10 +61,11 @@ export function AuthForm() {
         showError={formik.touched.password}
         error={formik.errors.password}
       />
-
-      <button type='submit' disabled={formik.isSubmitting && authState.isLoading}>
-        {t('button.login')}
-      </button>
+      <Button
+        disabled={isLoading}
+        pending={isLoading}
+        text={t('button.login')}
+      />
     </FormWrapper>
   )
 }

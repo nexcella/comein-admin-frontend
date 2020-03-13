@@ -1,27 +1,36 @@
 import React, {ChangeEvent} from "react";
 import styled from "astroturf";
 
-const InputWrapper = styled.input<{error: boolean}>`
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const InputElement = styled.input<{ error: boolean }>`
+  width: 100%;
   margin-top: 20px;
-  height: 30px;
+  height: 40px;
   border-radius: 4px;
   border: 1px solid rgba(196, 196, 196, 0.7);
   background-color: rgba(248, 248, 248, 0.5);
   padding-left: 12px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 30px;
   outline: none;
   &:focus {
     border-color: rgba(79, 172, 254, 0.7);
+    box-shadow: 0 0 1px 1px #45a5f9;
   }
   &.error {
     border-color: #EB7575;
   }
 `;
 
-const ErrorSpan = styled.span`
+const ErrorWrapper = styled.div`
   color: #EB7575;
-  font-size: 12px;
+  font-size: 14px;
+  position: absolute;
+  padding: 0 12px;
+  text-transform: lowercase;
 `;
 
 type InputProps = {
@@ -51,8 +60,8 @@ export function Input(
   const hasError = showError && error?.length > 0;
 
   return (
-    <>
-      <InputWrapper
+    <InputWrapper>
+      <InputElement
         error={hasError}
         type={type}
         name={name}
@@ -62,8 +71,8 @@ export function Input(
         value={value}
       />
       {hasError && (
-        <ErrorSpan>{error}</ErrorSpan>
+        <ErrorWrapper>{error}</ErrorWrapper>
       )}
-    </>
+    </InputWrapper>
   )
 }
