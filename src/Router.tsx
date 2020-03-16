@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect} from 'react';
+import React, {ReactNode, useCallback, useEffect} from 'react';
 import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
 import {observer} from "mobx-react";
 
@@ -17,16 +17,18 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
   const {isLoggedIn} = useAuthState();
+  const render = useCallback(({location}) => {
+    if (isLoggedIn) {
+      return children
+    }
+    logger.debug(`Access denied: ${path}. Redirect to: /auth`);
+    return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
+  },[isLoggedIn]);
+
   return (
     <Route
       path={path}
-      render={({location}) => {
-        if (isLoggedIn) {
-          return children
-        }
-        logger.debug(`Access denied: ${path}. Redirect to: /auth`);
-        return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
-      }}
+      render={render}
     />
   )
 });
