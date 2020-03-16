@@ -24,7 +24,7 @@ const ButtonComponent = styled.button`
   }
   
   & svg {
-    height: 40px;
+    height: 30px;
   }
 `
 

@@ -7,12 +7,21 @@ import {useAuthState} from "../components/auth/AuthProvider";
 import {Logo} from "../components/logo/Logo";
 import {AuthForm} from "../components/auth/AuthForm";
 
+const AuthScreen = styled.div`
+  display: flex;
+`;
+
 const AuthWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: space-between;
   height: 100vh;
+  flex-grow: 1;
+  
+  @media (min-width: 1050px) {
+    min-width: 570px;
+  }
 `
 
 const FormWrapper = styled.div`
@@ -50,6 +59,16 @@ const RegisterLink = styled(Link)`
   text-decoration: none;
 `
 
+const Background = styled.div`
+  background: linear-gradient(90deg, #4FACFE, #237CCB);
+  width: 100%;
+  height: 100vh;
+  flex-grow: 3;
+  @media (max-width: 1050px) {
+    display: none;
+  }
+`;
+
 
 export const Auth = () => {
   const authState = useAuthState();
@@ -58,19 +77,22 @@ export const Auth = () => {
   }
 
   return (
-    <AuthWrapper>
-      <div/>
-      <FormWrapper>
-        <Logo/>
-        <Subtitle>личный кабинет организатора</Subtitle>
-        <AuthForm/>
-        <ForgotLinkWrapper>
-          <ForgotLink to='/forgot'>забыли пароль?</ForgotLink>
-        </ForgotLinkWrapper>
-      </FormWrapper>
-      <RegisterWrapper>
-        Нет аккаунта? <RegisterLink to={'/register'}>Создайте своё первое мероприятие</RegisterLink>
-      </RegisterWrapper>
-    </AuthWrapper>
+    <AuthScreen>
+      <AuthWrapper>
+        <div/>
+        <FormWrapper>
+          <Logo/>
+          <Subtitle>личный кабинет организатора</Subtitle>
+          <AuthForm/>
+          <ForgotLinkWrapper>
+            <ForgotLink to='/forgot'>забыли пароль?</ForgotLink>
+          </ForgotLinkWrapper>
+        </FormWrapper>
+        <RegisterWrapper>
+          Нет аккаунта? <RegisterLink to={'/register'}>Создайте своё первое мероприятие</RegisterLink>
+        </RegisterWrapper>
+      </AuthWrapper>
+      <Background/>
+    </AuthScreen>
   );
 };
