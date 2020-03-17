@@ -39,6 +39,7 @@ export function AuthForm() {
   });
 
   const isLoading = formik.isSubmitting && authState.isLoading;
+  const isValid = formik.dirty && formik.isValid;
 
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
@@ -62,7 +63,7 @@ export function AuthForm() {
         error={formik.errors.password}
       />
       <Button
-        disabled={isLoading}
+        disabled={!isValid || isLoading}
         pending={isLoading}
         text={t('button.login')}
       />

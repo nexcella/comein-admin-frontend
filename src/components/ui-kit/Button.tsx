@@ -20,7 +20,8 @@ const ButtonComponent = styled.button`
     background-color:#339FFF;
   }
   &:disabled {
-    background-color: #75b8f8;
+    background-color: #dfe4e9;
+    color: #8c99a8;
   }
   
   & svg {
@@ -45,7 +46,7 @@ export function Button(
 ) {
   return (
     <ButtonComponent type={type} disabled={disabled}>
-      {pending ? <Loader size='small'/> : text}
+      {pending ? <Loader size='small' fill={'#8c99a8'}/> : text}
     </ButtonComponent>
   )
 }

@@ -16,9 +16,8 @@ export function Loader({fill = '#fff', size = 'normal'}: LoaderProps) {
     }
   }, [size])
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width * 2} ${height * 2}`} xmlns="http://www.w3.org/2000/svg"
-         fill={fill}>
-      <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+    <svg width={width} height={height} viewBox={`0 0 ${width * 2} ${height * 2}`} xmlns="http://www.w3.org/2000/svg">
+      <circle fill={fill} stroke="none" cx="6" cy="50" r="6">
         <animate
           attributeName="opacity"
           dur="1s"
@@ -26,7 +25,7 @@ export function Loader({fill = '#fff', size = 'normal'}: LoaderProps) {
           repeatCount="indefinite"
           begin="0.1"/>
       </circle>
-      <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+      <circle fill={fill} stroke="none" cx="26" cy="50" r="6">
         <animate
           attributeName="opacity"
           dur="1s"
@@ -34,7 +33,7 @@ export function Loader({fill = '#fff', size = 'normal'}: LoaderProps) {
           repeatCount="indefinite"
           begin="0.2"/>
       </circle>
-      <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+      <circle fill={fill} stroke="none" cx="46" cy="50" r="6">
         <animate
           attributeName="opacity"
           dur="1s"
