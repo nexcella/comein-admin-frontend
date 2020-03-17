@@ -6,6 +6,7 @@ import styled from "astroturf";
 import {useAuthState} from "../components/auth/AuthProvider";
 import {Logo} from "../components/logo/Logo";
 import {AuthForm} from "../components/auth/AuthForm";
+import {GoogleLoginButton} from "../components/auth/GoogleLoginButton";
 
 const AuthScreen = styled.div`
   display: flex;
@@ -70,6 +71,13 @@ const Background = styled.div`
 `;
 
 
+const GoogleLoginWrapper = styled.div`
+  margin: 20px 0;
+`
+const Label = styled.span`
+  color: #5F5E5E;
+`
+
 export const Auth = () => {
   const authState = useAuthState();
   if (authState.isLoggedIn) {
@@ -83,13 +91,18 @@ export const Auth = () => {
         <FormWrapper>
           <Logo/>
           <Subtitle>личный кабинет организатора</Subtitle>
+          <GoogleLoginWrapper>
+            <GoogleLoginButton/>
+          </GoogleLoginWrapper>
+          <Label>или</Label>
           <AuthForm/>
           <ForgotLinkWrapper>
             <ForgotLink to='/forgot'>забыли пароль?</ForgotLink>
           </ForgotLinkWrapper>
         </FormWrapper>
         <RegisterWrapper>
-          Нет аккаунта? <RegisterLink to={'/register'}>Создайте своё первое мероприятие</RegisterLink>
+          Нет аккаунта?
+          <RegisterLink to='/register'>Создайте своё первое мероприятие</RegisterLink>
         </RegisterWrapper>
       </AuthWrapper>
       <Background/>

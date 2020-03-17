@@ -11,7 +11,10 @@ import {Button} from "../ui-kit/Button";
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 20px;
+  & > div:first-child input {
+    margin-top: 0;
+  }
   & button {
     margin-top: 35px;
   }
