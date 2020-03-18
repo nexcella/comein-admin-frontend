@@ -1,10 +1,11 @@
 import React from "react";
 import {GoogleLogin} from 'react-google-login';
+import {config} from "../../config/app";
 
 export function GoogleLoginButton() {
   return (
     <GoogleLogin
-      clientId='1066587620419-9ck020c8qsg3o52efoksgec9ki1k462u.apps.googleusercontent.com'
+      clientId={String(config.googleClientId)}
       onFailure={(res) => {
         console.error({res})
       }}
