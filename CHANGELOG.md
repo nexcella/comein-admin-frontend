@@ -1,3 +1,10 @@
+# [1.2.0-rc.2](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-rc.1...v1.2.0-rc.2) (2020-03-21)
+
+
+### Features
+
+* **logger:** remove unnecessary logger type casting ([03923f6](https://github.com/a-shabanov/comein-admin-frontend/commit/03923f6cfe5d35f721ff9c426e4011c5b3411b44))
+
 # 1.0.0-beta.1 (2020-03-21)
 
 
