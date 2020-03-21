@@ -10,8 +10,9 @@ on:
 jobs:
   release:
     name: Release
-    run: npm run semantic-release || true
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      CI: true
+    steps:
+      - run: npm run semantic-release || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          CI: true
