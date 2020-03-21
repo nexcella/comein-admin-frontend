@@ -1,5 +1,5 @@
 {
-  "name": "@comein/admin-frontend",
+  "name": "@nexcella/comein-web",
   "version": "0.0.0-development",
   "description": "Web application for ComeIn admin panel",
   "contributors": [
@@ -82,6 +82,7 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/github",
+      "@semantic-release/npm",
       [
         "@semantic-release/git",
         {
