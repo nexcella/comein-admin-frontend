@@ -1,3 +1,10 @@
+# [1.0.0-rc.2](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2020-03-21)
+
+
+### Bug Fixes
+
+* **semantic:** update semantic workflow file ([e327892](https://github.com/a-shabanov/comein-admin-frontend/commit/e327892e226824cba8079fba21974a6b87f7bfb9))
+
 # 1.0.0-rc.1 (2020-03-21)
 
 
