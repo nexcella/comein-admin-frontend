@@ -1,3 +1,11 @@
+# [1.0.0-rc.7](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2020-03-21)
+
+
+### Bug Fixes
+
+* **semantic:** change GH token key ([b9a807e](https://github.com/a-shabanov/comein-admin-frontend/commit/b9a807e9826ec75ac0ce005c3fd02a66940943e1))
+* **semantic:** rename flow ([d051905](https://github.com/a-shabanov/comein-admin-frontend/commit/d051905624f8ea30db105251d1e727945538f45b))
+
 # [1.0.0-rc.6](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2020-03-21)
 
 
