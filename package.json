@@ -1,6 +1,6 @@
 {
-  "name": "@comein/admin-frontend",
-  "version": "0.0.0-development",
+  "name": "@nexcella/comein-web",
+  "version": "1.1.0-rc.1",
   "description": "Web application for ComeIn admin panel",
   "contributors": [
     {
@@ -63,17 +63,15 @@
     "type": "git",
     "url": "https://github.com/a-shabanov/comein-admin-frontend.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "release": {
     "branches": [
       {
         "name": "release/([0-9]+)\\.([0-9]+)\\.([0-9]+)",
         "channel": "rc",
         "prerelease": "rc"
-      },
-      {
-        "name": "develop",
-        "channel": "beta",
-        "prerelease": "beta"
       },
       "master"
     ],
@@ -82,6 +80,12 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/github",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
       [
         "@semantic-release/git",
         {
