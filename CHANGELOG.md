@@ -1,4 +1,4 @@
-# 1.0.0 (2020-03-21)
+# 1.0.0-beta.1 (2020-03-21)
 
 
 ### Bug Fixes
@@ -26,12 +26,15 @@
 * **auth:** remove extra space in .env ([c2e8332](https://github.com/a-shabanov/comein-admin-frontend/commit/c2e83327d8f822f3c7df34933f1672b9bb0bc0a5))
 * **button:** disable button ([0b4693c](https://github.com/a-shabanov/comein-admin-frontend/commit/0b4693cae51d3bc9789fc5668ae0ba6284ece10e))
 * **error:** error boundary ([33b7537](https://github.com/a-shabanov/comein-admin-frontend/commit/33b7537990dbbfde621879e7d47a4b78ad14af3f))
+* **error:** optimize boundary ([202511e](https://github.com/a-shabanov/comein-admin-frontend/commit/202511eef4c31e1eaa84805b0bfac31147ef877e))
 * **i18n:** init translations ([43f64b6](https://github.com/a-shabanov/comein-admin-frontend/commit/43f64b6125aefdb46b08b572acbebfb362e49a55))
 * **i18n:** language detector + change locale action ([1293eb6](https://github.com/a-shabanov/comein-admin-frontend/commit/1293eb695cc8e73070cd44551112fa11d21c6b22))
 * **loader:** update loader element ([0b2cc68](https://github.com/a-shabanov/comein-admin-frontend/commit/0b2cc68603053cf2cc281b7217b596ffbaabd950))
 * **loader:** update loader element/2 ([5065a78](https://github.com/a-shabanov/comein-admin-frontend/commit/5065a78b77481787b4e7d900ca733beb4f0070eb))
 * **router:** Add webpack history fallback ([9e53750](https://github.com/a-shabanov/comein-admin-frontend/commit/9e53750b966314c5489db7e140f770e045dfaba5))
 * **router:** init router ([74894ed](https://github.com/a-shabanov/comein-admin-frontend/commit/74894ed23427c3684e6633372f796cbab6a93169))
+* **semantic:** beta release ([e4081bd](https://github.com/a-shabanov/comein-admin-frontend/commit/e4081bdc95dff6ce7001e1cc0e80718aa2232fed))
+* **semantic:** name of release actio ([6b4c96b](https://github.com/a-shabanov/comein-admin-frontend/commit/6b4c96b662d43fbdf54a6e94c7e4e91ace5d0ce9))
 * **storage:** add tests action (TS only) ([b65490c](https://github.com/a-shabanov/comein-admin-frontend/commit/b65490ceeb27aebb32a56f6057b28e38f7c7c9a7))
 * **storage:** add token formatter ([0c855b9](https://github.com/a-shabanov/comein-admin-frontend/commit/0c855b92fb9ec5591ddbcc8a4d8acb92d094f649))
 * **storage:** auth storage ([0368bc4](https://github.com/a-shabanov/comein-admin-frontend/commit/0368bc47f44957f4c1be0bc9fdacac372989df58))
