@@ -18,7 +18,7 @@ jobs:
     - run: npm test
       env:
         CI: true
-
+    - run: echo ${{ secrets.NPM_TOKEN }}
     - name: Release
       run: npm run semantic-release
       env:
