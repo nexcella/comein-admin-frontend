@@ -1,4 +1,4 @@
-name: Build react-app
+name: App process
 
 on: [push]
 
