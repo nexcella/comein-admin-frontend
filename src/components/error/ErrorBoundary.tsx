@@ -23,9 +23,11 @@ export class ErrorBoundary extends React.PureComponent<ErrorBoundaryProps, Error
   }
 
   render() {
-    return this.state.errorMessage ? (
+    const {errorMessage} = this.state;
+
+    return errorMessage ? (
       <>
-        <div>Something wrong: {this.state.errorMessage}</div>
+        <div>Something wrong: {errorMessage}</div>
         <button onClick={() => location.href = '/'}>go to main page</button>
       </>
     ) : this.props.children;
