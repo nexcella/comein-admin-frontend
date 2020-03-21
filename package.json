@@ -63,6 +63,9 @@
     "type": "git",
     "url": "https://github.com/a-shabanov/comein-admin-frontend.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "release": {
     "branches": [
       {
