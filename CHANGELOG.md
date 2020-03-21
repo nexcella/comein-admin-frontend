@@ -1,3 +1,10 @@
+# [1.0.0-rc.6](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2020-03-21)
+
+
+### Bug Fixes
+
+* **semantic:** remove unused file for release ([e37a824](https://github.com/a-shabanov/comein-admin-frontend/commit/e37a8244304421b40368cecd48b5ef6f9284306e))
+
 # [1.0.0-rc.5](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2020-03-21)
 
 
