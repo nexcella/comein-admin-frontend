@@ -1,3 +1,10 @@
+# [1.2.0-rc.3](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-rc.2...v1.2.0-rc.3) (2020-03-22)
+
+
+### Bug Fixes
+
+* **auth:** 100% google button width ([8d5c866](https://github.com/a-shabanov/comein-admin-frontend/commit/8d5c866be51779da6b6651260233a66bfe9ced41))
+
 # [1.2.0-rc.2](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-rc.1...v1.2.0-rc.2) (2020-03-21)
 
 
