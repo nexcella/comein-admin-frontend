@@ -73,6 +73,10 @@ const Background = styled.div`
 
 const GoogleLoginWrapper = styled.div`
   margin: 20px 0;
+  & button {
+    width: 100%;
+    justify-content: center;
+  }
 `
 const Label = styled.span`
   color: #5F5E5E;
