@@ -1,8 +1,11 @@
 name: Release
 
 on:
-  repository_dispatch:
-    types: [ready-version]
+  push:
+    branches:
+      - master
+      - develop
+      - release/*
 jobs:
   release:
     runs-on: ubuntu-latest
