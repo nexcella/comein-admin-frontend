@@ -1,13 +1,13 @@
 name: Release
 
-on: [push]
-
+on:
+  repository_dispatch:
+    types: [ready-version]
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
     - name: Release
-      needs: [test]
       run: npm run semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
