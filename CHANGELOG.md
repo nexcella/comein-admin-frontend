@@ -1,3 +1,35 @@
+# [1.2.0-rc.1](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.1.1...v1.2.0-rc.1) (2020-04-07)
+
+
+### Bug Fixes
+
+* **auth:** 100% google button width ([a1b08c3](https://github.com/a-shabanov/comein-admin-frontend/commit/a1b08c3e159f72efe0ad37f82acb11860ac1eb0d))
+* **error:** add cancel jobs ([154ca93](https://github.com/a-shabanov/comein-admin-frontend/commit/154ca9322c91402c44ac38db57fef80a8d12412f))
+* **release:** add develop in config ([b1962eb](https://github.com/a-shabanov/comein-admin-frontend/commit/b1962eb5ef9b4bebeba88c6d818f27e7bac4c562))
+* **release:** fix sp ([51931e1](https://github.com/a-shabanov/comein-admin-frontend/commit/51931e18373017867ea1af7deb48fa163d8d4dac))
+* **release:** fix sp2 ([6623bb6](https://github.com/a-shabanov/comein-admin-frontend/commit/6623bb683aa478839c41734f376bb006dd7e9376))
+
+
+### Features
+
+* **logger:** remove unnecessary logger type casting ([7cc517e](https://github.com/a-shabanov/comein-admin-frontend/commit/7cc517e318f543251a6d945ecba51d3d15f6ef34))
+* **logger:** remove unnecessary logger type casting ([66c6c77](https://github.com/a-shabanov/comein-admin-frontend/commit/66c6c77e505c91b76e9298651e40677f4ad36470))
+* **release:** fix sp4 ([088e820](https://github.com/a-shabanov/comein-admin-frontend/commit/088e8207722dc835e8d58b5f6dd971204a0200ec))
+
+# [1.2.0-rc.3](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-rc.2...v1.2.0-rc.3) (2020-03-22)
+
+
+### Bug Fixes
+
+* **auth:** 100% google button width ([8d5c866](https://github.com/a-shabanov/comein-admin-frontend/commit/8d5c866be51779da6b6651260233a66bfe9ced41))
+
+# [1.2.0-rc.2](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-rc.1...v1.2.0-rc.2) (2020-03-21)
+
+
+### Features
+
+* **logger:** remove unnecessary logger type casting ([03923f6](https://github.com/a-shabanov/comein-admin-frontend/commit/03923f6cfe5d35f721ff9c426e4011c5b3411b44))
+
 # 1.0.0-beta.1 (2020-03-21)
 
 

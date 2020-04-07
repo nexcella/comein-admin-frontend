@@ -1,6 +1,6 @@
 {
   "name": "@nexcella/comein-web",
-  "version": "1.1.1",
+  "version": "1.2.0-rc.1",
   "description": "Web application for ComeIn admin panel",
   "contributors": [
     {
@@ -73,6 +73,10 @@
         "channel": "rc",
         "prerelease": "rc"
       },
+      {
+        "name": "develop",
+        "prerelease": "beta"
+      },
       "master"
     ],
     "plugins": [
@@ -89,9 +93,6 @@
       [
         "@semantic-release/git",
         {
-          "assets": [
-            "package.json"
-          ],
           "message": "chore(release): ${nextRelease.version}"
         }
       ]
