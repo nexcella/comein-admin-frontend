@@ -5,11 +5,10 @@ on: [push]
 jobs:
   release:
     runs-on: ubuntu-latest
-    needs:
+    needs: [test]
     steps:
     - name: Release
       run: npm run semantic-release
-      needs: [test]
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
