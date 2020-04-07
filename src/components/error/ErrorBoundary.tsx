@@ -24,7 +24,6 @@ export class ErrorBoundary extends React.PureComponent<ErrorBoundaryProps, Error
 
   render() {
     const {errorMessage} = this.state;
-
     return errorMessage ? (
       <>
         <div>Something wrong: {errorMessage}</div>
