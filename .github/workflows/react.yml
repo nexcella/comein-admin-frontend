@@ -19,7 +19,7 @@ jobs:
       with:
         token: ${{ secrets.GH_TOKEN }}
     - run: npm install
-    - run: npm test
+    - name: test
+      run: npm test
       env:
         CI: true
-    - run: release

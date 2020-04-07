@@ -7,6 +7,7 @@ jobs:
     steps:
     - name: Release
       run: npm run semantic-release
+      needs: [test]
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
