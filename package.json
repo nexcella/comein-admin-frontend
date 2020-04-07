@@ -73,6 +73,10 @@
         "channel": "rc",
         "prerelease": "rc"
       },
+      {
+        "name": "develop",
+        "prerelease": "beta"
+      },
       "master"
     ],
     "plugins": [
