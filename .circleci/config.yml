@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
+
   build-and-test:
     executor:
       name: node/default
@@ -15,6 +16,7 @@ jobs:
           root: ./
           paths:
             - node_modules
+
   semver:
     executor:
       name: node/default
@@ -30,7 +32,6 @@ jobs:
             CI: true
 
 workflows:
-  version: 2.1
   build:
     jobs:
       - build-and-test
