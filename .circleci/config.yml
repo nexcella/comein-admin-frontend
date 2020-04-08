@@ -24,9 +24,9 @@ jobs:
             CI: true
 
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
-        - semver
-            requires:
-              - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test
+      - semver
+          requires:
+            - build-and-test
