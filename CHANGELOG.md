@@ -1,3 +1,10 @@
+# [1.2.0-next.1](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-beta.4...v1.2.0-next.1) (2020-04-08)
+
+
+### Bug Fixes
+
+* **version:** add next releases ([209cc8b](https://github.com/a-shabanov/comein-admin-frontend/commit/209cc8bfe9fc8b852dda2be0c440623691df252f))
+
 # [1.2.0](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.1.1...v1.2.0) (2020-04-08)
 
 
