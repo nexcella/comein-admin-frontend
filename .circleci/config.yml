@@ -36,7 +36,12 @@ jobs:
 workflows:
   build:
     jobs:
-      - build-and-test
+      - build-and-test:
+          filters:
+            tags:
+              ignore:
+                - /^v.*/
       - semver:
           requires:
             - build-and-test
+

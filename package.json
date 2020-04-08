@@ -75,7 +75,7 @@
       },
       {
         "name": "develop",
-        "prerelease": "beta"
+        "prerelease": "next"
       },
       "master"
     ],
