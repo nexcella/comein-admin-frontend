@@ -11,7 +11,19 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+    release:
+      command: npm run semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        CI: true
+      branches:
+        only:
+          - master
+          - develop
+          - release/*
 workflows:
     build-and-test:
       jobs:
         - build-and-test
+        - release
