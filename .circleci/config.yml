@@ -11,10 +11,16 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - node_modules
   semver:
     executor:
       name: node/default
     steps:
+      - attach_workspace:
+          at: ./
       - run:
           name: semantic version
           command: npm run semantic-release
@@ -24,9 +30,8 @@ jobs:
             CI: true
 
 workflows:
+  version: 2.1
   build-and-test:
     jobs:
       - build-and-test
       - semver
-          requires:
-            - build-and-test
