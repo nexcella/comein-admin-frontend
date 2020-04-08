@@ -26,4 +26,6 @@ workflows:
     build-and-test:
       jobs:
         - build-and-test
+    semver:
+      jobs:
         - semver
