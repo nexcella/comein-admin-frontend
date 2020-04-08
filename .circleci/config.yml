@@ -12,6 +12,8 @@ jobs:
             - run: npm install
             - run: npm test
   semver:
+    executor:
+      name: node/default
     steps:
       command: npm run semantic-release
       env:
