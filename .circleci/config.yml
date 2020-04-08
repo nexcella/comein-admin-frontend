@@ -22,6 +22,7 @@ jobs:
     executor:
       name: node/default
     steps:
+      - checkout
       - attach_workspace:
           at: ./
       - run:
