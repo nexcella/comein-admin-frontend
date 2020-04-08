@@ -11,7 +11,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-    semver:
+  semver:
+    steps:
       command: npm run semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
