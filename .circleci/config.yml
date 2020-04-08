@@ -22,15 +22,17 @@ jobs:
             GITHUB_TOKEN: ${GH_TOKEN}
             NPM_TOKEN: ${NPM_TOKEN}
             CI: true
-          branches:
-            only:
-              - master
-              - develop
-              - release/*
+
 workflows:
     build-and-test:
       jobs:
         - build-and-test
         - semver
-            requires
-              - build-and-test
+          requires
+            - build-and-test
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - release/*
