@@ -16,17 +16,17 @@ jobs:
       name: node/default
     steps:
       - run:
-        name: semantic version
-        command: npm run semantic-release
-        env:
-          GITHUB_TOKEN: ${GH_TOKEN}
-          NPM_TOKEN: ${NPM_TOKEN}
-          CI: true
-        branches:
-          only:
-            - master
-            - develop
-            - release/*
+          name: semantic version
+          command: npm run semantic-release
+          env:
+            GITHUB_TOKEN: ${GH_TOKEN}
+            NPM_TOKEN: ${NPM_TOKEN}
+            CI: true
+          branches:
+            only:
+              - master
+              - develop
+              - release/*
 workflows:
     build-and-test:
       jobs:
