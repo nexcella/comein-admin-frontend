@@ -1,3 +1,17 @@
+# [1.2.0-beta.2](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2020-04-08)
+
+
+### Bug Fixes
+
+* **release:** release on another branch ([2d8b9e1](https://github.com/a-shabanov/comein-admin-frontend/commit/2d8b9e1c9bb788af30d71dfca3e1a31da41d965e))
+* **release:** release on another branch ([13c1d41](https://github.com/a-shabanov/comein-admin-frontend/commit/13c1d418360721e5b6b87c748148b3e7eeea4d48))
+* **release:** release on another branch ([a41e948](https://github.com/a-shabanov/comein-admin-frontend/commit/a41e948e51e64db25598ce3aa61b45a7fe7b6c44))
+* **release:** release on another branch ([1f8777f](https://github.com/a-shabanov/comein-admin-frontend/commit/1f8777f4d85a4a82330240f6b0ed46e976788589))
+* **release:** release on another branch ([8df16a1](https://github.com/a-shabanov/comein-admin-frontend/commit/8df16a1d089a93a21f62b29ee3048ed5bacc54e1))
+* **release:** release on another branch ([efb3d01](https://github.com/a-shabanov/comein-admin-frontend/commit/efb3d0166b79a8463bb482d16db5a32280c5e92a))
+* **release:** release on another branch ([332d8cb](https://github.com/a-shabanov/comein-admin-frontend/commit/332d8cbb4400c2d84039a76a3c1ec550e260b717))
+* **release:** release on another branch ([a28cfd1](https://github.com/a-shabanov/comein-admin-frontend/commit/a28cfd14f80da64de0a0a2bd42ae9849e67e170b))
+
 # [1.2.0-rc.1](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.1.1...v1.2.0-rc.1) (2020-04-07)
 
 
