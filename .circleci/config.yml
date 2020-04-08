@@ -30,9 +30,3 @@ workflows:
         - semver
           requires
             - build-and-test
-          filters:
-            branches:
-              only:
-                - master
-                - develop
-                - release/*
