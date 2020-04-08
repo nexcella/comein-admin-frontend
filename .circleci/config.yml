@@ -28,5 +28,5 @@ workflows:
       jobs:
         - build-and-test
         - semver
-          requires
+          requires:
             - build-and-test
