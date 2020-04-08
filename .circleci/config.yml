@@ -16,6 +16,7 @@ jobs:
           root: ./
           paths:
             - node_modules
+            - packaje.json
 
   semver:
     executor:
