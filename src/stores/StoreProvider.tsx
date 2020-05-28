@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {MobXProviderContext, observer} from "mobx-react";
-import {reaction} from "mobx";
 
 import {store} from "./RootStore";
 import {initStorage} from "./initStore";
-import i18n from "../i18n";
 import {AppStore, AppStoreKey} from "./AppStore";
+import {AuthStoreKey} from "./AuthStore";
+import {apiService} from "../services/api/ApiService";
 
 const SHOW_LOADER_TIMEOUT = 200;
 
@@ -17,13 +17,15 @@ export function useAppStore(): AppStore {
   return React.useContext(MobXProviderContext)[AppStoreKey];
 }
 
-initStorage();
-
 let loaderTimeoutId: number;
 
 export const StoreProvider = observer(({children}: { children: React.ReactNode }) => {
 
   const [needLoader, setNeedLoader] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    initStorage();
+  },[])
 
   useEffect(() => {
     if (store.storeLoaded) {
@@ -35,6 +37,13 @@ export const StoreProvider = observer(({children}: { children: React.ReactNode }
       }, SHOW_LOADER_TIMEOUT);
     }
   }, [store.storeLoaded])
+
+  useEffect(() => {
+    const token = store[AuthStoreKey].token;
+    if(token) {
+      apiService.setToken(token)
+    }
+  }, [store[AuthStoreKey].token])
 
   // @TODO add store loader animation
   return (
