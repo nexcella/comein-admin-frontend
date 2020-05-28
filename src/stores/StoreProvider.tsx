@@ -40,9 +40,7 @@ export const StoreProvider = observer(({children}: { children: React.ReactNode }
 
   useEffect(() => {
     const token = store[AuthStoreKey].token;
-    if(token) {
-      apiService.setToken(token)
-    }
+    apiService.setToken(token)
   }, [store[AuthStoreKey].token])
 
   // @TODO add store loader animation

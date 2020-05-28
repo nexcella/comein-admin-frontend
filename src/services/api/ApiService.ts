@@ -11,8 +11,12 @@ export class ApiService {
     this.auth = new AuthService(this.transport);
   }
 
-  public setToken(token: string) {
-    logger.debug('[auth] set token: *****');
+  public setToken(token?: string) {
+    if(token) {
+      logger.debug('[auth] set token: *****');
+    } else {
+      logger.debug('[auth] empty token');
+    }
     this.transport.setToken(token)
   }
 }

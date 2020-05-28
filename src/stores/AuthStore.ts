@@ -21,8 +21,8 @@ export class AuthStore {
   @observable isLoggedIn = false;
 
   @format(
-    (hash) => atob(hash),
-    (token: string) => btoa(token)
+    (hash) => hash ? atob(hash): undefined,
+    (token?: string) => token ? btoa(token) : undefined
   )
   @observable token?: string
 
@@ -52,7 +52,7 @@ export class AuthStore {
     this.isLoggedIn = false;
     this.isLoading = false;
     this.authData = undefined;
-    logger.debug('logout');
+    this.token = undefined;
   }
 
 }

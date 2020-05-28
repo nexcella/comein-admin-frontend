@@ -15,9 +15,12 @@ export class XHRTransport implements TransportInterface {
     })
   }
 
-  public setToken(token: string) {
-    this.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
+  public setToken(token?: string) {
+    if(token) {
+      this.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    } else {
+      this.axios.defaults.headers.common['Authorization'] = undefined;
+    }
   }
 
   public request<T, R>(method: Method, url: string, data?: T, options?: object): Promise<R> {
