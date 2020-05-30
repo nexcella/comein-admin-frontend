@@ -27,6 +27,11 @@ i18n
               count_2: '{{field}} должен быть более {{count}} символов',
               count_5: '{{field}} должен быть более {{count}} символов',
             }
+          },
+          errors: {
+            internal: 'Ошибка сервера. Попробуйте повротить попытку позднее',
+            validation: 'Введенные данные неверны. Проверьте корректность заполнения формы и попробуйте еще раз.',
+            incorrect_username: 'Неверное имя пользователя или пароль'
           }
         }
       },
@@ -45,6 +50,11 @@ i18n
               count: '{{field}} must be at least {{count}} character',
               count_plural: '{{field}} must be at least {{count}} characters',
             }
+          },
+          errors: {
+            internal: 'Server error. Please try again later',
+            validation: 'Validation error. Check your input and try again',
+            incorrect_username: 'Incorrect username or password'
           }
         }
       }

@@ -1,4 +1,4 @@
-import {UsernameLoginDto, UsernameLoginResponse} from "@nexcella/comein-api";
+import {UsernameLoginDto, UsernameLoginResponse, MyProfileResponse} from "@nexcella/comein-api";
 import {NetworkService} from "../network/NetworkService";
 
 export class AuthService extends NetworkService {
@@ -8,6 +8,6 @@ export class AuthService extends NetworkService {
   }
 
   profile() {
-    return this.transport.request<any, any>('GET', '/profile/me')
+    return this.transport.request<MyProfileResponse>('GET', '/profile/me')
   }
 }

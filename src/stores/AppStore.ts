@@ -7,7 +7,6 @@ export class AppStore {
   @observable locale: string = config.defaultLocale;
 
   @action setLocale(locale: string) {
-    console.log('change locale')
     this.locale = locale;
   }
 }

@@ -7,6 +7,7 @@ import {LoginData} from "../../stores/AuthStore";
 import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
 import {Button} from "../ui-kit/Button";
+import {ErrorLabel} from "../error/ErrorLabel";
 
 const FormWrapper = styled.form`
   display: flex;
@@ -65,6 +66,7 @@ export function AuthForm() {
         showError={formik.touched.password}
         error={formik.errors.password}
       />
+      {authState.error && <ErrorLabel text={t(`errors.${authState.error}`)}/>}
       <Button
         disabled={!isValid || isLoading}
         pending={isLoading}

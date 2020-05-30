@@ -15,7 +15,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "@nexcella/comein-api": "0.0.6",
+    "@nexcella/comein-api": "0.0.8",
     "@nexcella/logger": "1.0.0",
     "@types/yup": "0.29.0",
     "axios": "0.19.2",

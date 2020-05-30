@@ -2,8 +2,8 @@ import React, {ReactNode, useCallback, useEffect} from 'react';
 import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
 import {observer} from "mobx-react";
 
-import {Auth} from "./screens/Auth";
-import {Home} from "./screens/Home";
+import {Auth} from "./screens/public/Auth";
+import {Main} from "./screens/protected/Main";
 import {logger} from "./utils/logger";
 import {useAuthState} from "./components/auth/AuthProvider";
 import {reaction} from "mobx";
@@ -59,7 +59,7 @@ export function Router() {
           <Auth/>
         </Route>
         <ProtectedRoute path='/'>
-          <Home/>
+          <Main/>
           <NavLink to={'/auth'}>Auth &gt; </NavLink>
         </ProtectedRoute>
       </Switch>

@@ -3,10 +3,10 @@ import {Link, Redirect} from "react-router-dom"
 
 import styled from "astroturf";
 
-import {useAuthState} from "../components/auth/AuthProvider";
-import {Logo} from "../components/logo/Logo";
-import {AuthForm} from "../components/auth/AuthForm";
-import {GoogleLoginButton} from "../components/auth/GoogleLoginButton";
+import {useAuthState} from "../../components/auth/AuthProvider";
+import {Logo} from "../../components/logo/Logo";
+import {AuthForm} from "../../components/auth/AuthForm";
+import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 
 const AuthScreen = styled.div`
   display: flex;

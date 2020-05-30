@@ -4,6 +4,9 @@ import {nanoid} from "nanoid";
 import {TransportInterface} from "./TransportInterface";
 import {config} from "../../../config/app";
 import {logger} from "../../../utils/logger";
+import {SuccessResponse, ERRORS} from "@nexcella/comein-api";
+import {TransportError} from "./TransportError";
+import {getVersion} from "../../../utils/version";
 
 
 export class XHRTransport implements TransportInterface {
@@ -11,7 +14,10 @@ export class XHRTransport implements TransportInterface {
 
   constructor() {
     this.axios = axios.create({
-      baseURL: config.API.basePath
+      baseURL: config.API.basePath,
+      headers: {
+        client: `${config.appName} / ${getVersion()}`
+      }
     })
   }
 
@@ -28,12 +34,13 @@ export class XHRTransport implements TransportInterface {
     this.axios.defaults.headers.common['x-requestid'] = requestId;
     logger.debug(`[transport] -> ${requestId} - ${url}`);
 
-    return this.axios.request<R>({method, url, data}).then((response) => {
+    return this.axios.request<SuccessResponse<R>>({method, url, data}).then((response) => {
       logger.debug(`[transport] <- ${requestId} - ${response.status}`)
-      return response.data
+      return response.data.data
     }).catch((error) => {
-      logger.debug(`[transport] <- x ${requestId} - ${error.response.code ?? error.response.status}`);
-      return error.response.data;
+      logger.debug(`[transport] <- x ${requestId} - ${error.response.data?.data?.code ?? 'n/a'} - ${error.response.status}`);
+      const errorData = error.response.data?.data ?? {code: ERRORS.COMMON.INTERNAL}
+      throw new TransportError(errorData)
     });
   }
 

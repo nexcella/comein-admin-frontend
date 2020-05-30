@@ -13,7 +13,9 @@ export function useAuthState() {
   }
   return useObserver(() => ({
     isLoggedIn: authStore.isLoggedIn,
-    isLoading: authStore.isLoading
+    isLoading: authStore.isLoading,
+    profile: authStore.profile,
+    error: authStore.error
   }));
 }
 
@@ -24,7 +26,8 @@ export function useAuthActions() {
   }
   return {
     login: authStore.login,
-    logout: authStore.logout
+    logout: authStore.logout,
+    getProfile: authStore.getProfile,
   }
 }
 
