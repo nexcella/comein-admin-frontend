@@ -60,7 +60,6 @@ export function Router() {
         </Route>
         <ProtectedRoute path='/'>
           <Main/>
-          <NavLink to={'/auth'}>Auth &gt; </NavLink>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
