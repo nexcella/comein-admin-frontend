@@ -14,7 +14,7 @@ const Button = styled.div`
   height: 50px;
   min-width: 190px;
   max-width: 300px;
-  border-radius: 12px;
+  border-radius: 29px;
   font-size: 18px;
   display: flex;
   flex-direction: row;
@@ -43,7 +43,7 @@ export function UserButton({profile}: { profile: Profile }) {
     <UserButtonWrapper>
       <Button>
         <AvatarPlaceholder>{profile.username[0]}</AvatarPlaceholder>
-        <UsernameWrapper>{profile.username}</UsernameWrapper>
+        <UsernameWrapper>Настройки аккаунта</UsernameWrapper>
       </Button>
     </UserButtonWrapper>
   )

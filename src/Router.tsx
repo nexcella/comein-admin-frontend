@@ -1,5 +1,5 @@
 import React, {ReactNode, useCallback, useEffect} from 'react';
-import {BrowserRouter, NavLink, Redirect, Route, Switch} from "react-router-dom"
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom"
 import {observer} from "mobx-react";
 
 import {Auth} from "./screens/public/Auth";
@@ -13,9 +13,10 @@ import {useTranslation} from "react-i18next";
 interface ProtectedRouteProps {
   children: ReactNode,
   path: string,
+  exact?: boolean
 }
 
-const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
+const ProtectedRoute = observer(({children, path, exact = false}: ProtectedRouteProps) => {
   const {isLoggedIn} = useAuthState();
   const render = useCallback(({location}) => {
     if (isLoggedIn) {
@@ -23,10 +24,11 @@ const ProtectedRoute = observer(({children, path}: ProtectedRouteProps) => {
     }
     logger.debug(`Access denied: ${path}. Redirect to: /auth`);
     return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
-  },[isLoggedIn]);
+  }, [isLoggedIn]);
 
   return (
     <Route
+      exact={exact}
       path={path}
       render={render}
     />

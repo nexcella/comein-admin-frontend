@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "astroturf";
 import {useVersion} from "../../providers/VersionProvider";
+import {Button} from "../ui-kit/Button";
 
 const SidebarContainer = styled.aside`
   width: 290px;
@@ -8,7 +9,7 @@ const SidebarContainer = styled.aside`
   float: left;
   margin-top: -50px;
   background: white;
-  border-radius: 0 12px 0 0;
+  border-radius: 0 48px 0 0;
   position:relative;
   padding-bottom: 30px;
 `
@@ -27,6 +28,7 @@ export function Sidebar() {
   const version = useVersion();
 
   return <SidebarContainer>
+    <Button text='Создать клиента'/>
     <VersionContainer>
       Версия: {version}
     </VersionContainer>
