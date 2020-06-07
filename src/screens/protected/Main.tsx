@@ -36,7 +36,9 @@ export function Main() {
                 <LogoutButton>Logout</LogoutButton>
               </>
             )}/>
-            <Route path='/create-client' render={() => <div>123</div>}/>
+            <Route path='/clients' render={() => <div>list of clients</div>}/>
+            <Route path='/create-client' render={() => <div>create client</div>}/>
+            <Route path='/settings' render={() => <div>settings</div>}/>
             <Route path='*' render={() => <div>404</div>}/>
           </Switch>
         </Content>

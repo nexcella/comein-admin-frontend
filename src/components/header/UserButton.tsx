@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "astroturf";
+import {Link} from "react-router-dom";
+
 import {Profile} from "../../stores/AuthStore";
 
 const UserButtonWrapper = styled.div`
@@ -11,15 +13,15 @@ const UserButtonWrapper = styled.div`
 
 const Button = styled.div`
   background: white;
-  height: 50px;
+  height: 45px;
   min-width: 190px;
   max-width: 300px;
   border-radius: 29px;
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 10px;
 `
 
 const AvatarPlaceholder = styled.div`
@@ -41,10 +43,12 @@ const UsernameWrapper = styled.span`
 export function UserButton({profile}: { profile: Profile }) {
   return (
     <UserButtonWrapper>
-      <Button>
-        <AvatarPlaceholder>{profile.username[0]}</AvatarPlaceholder>
-        <UsernameWrapper>Настройки аккаунта</UsernameWrapper>
-      </Button>
+      <Link to='/settings'>
+        <Button>
+          <AvatarPlaceholder>{profile.username[0]}</AvatarPlaceholder>
+          <UsernameWrapper>Настройки аккаунта</UsernameWrapper>
+        </Button>
+      </Link>
     </UserButtonWrapper>
   )
 }
