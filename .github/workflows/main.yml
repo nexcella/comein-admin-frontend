@@ -19,7 +19,7 @@ jobs:
       id: package-version
 
     - name: Configure npm
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" > ~/.npmrc
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > ~/.npmrc
 
     - name: npm install, build, and test
       run: |
@@ -32,7 +32,7 @@ jobs:
         APP_PKG_VERSION: $GITHUB_RUN_NUMBER
 
     - name: Docker login
-      run: echo ${{ secrets.GH_BOT_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
+      run: echo ${{ secrets.GH_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
 
     - name: Docker build
       run: docker build -t docker.pkg.github.com/a-shabanov/admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
