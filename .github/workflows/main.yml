@@ -1,0 +1,41 @@
+name: Push CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Get version
+      uses: tyankatsu0105/read-package-version-actions@v1
+      id: package-version
+
+    - name: Configure npm
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" > ~/.npmrc
+
+    - name: npm install, build, and test
+      run: |
+        npm config set @nexcella:registry https://npm.pkg.github.com
+        npm ci
+        npm test
+        npm run build --if-present
+      env:
+        CI: true
+        APP_PKG_VERSION: $GITHUB_RUN_NUMBER
+
+    - name: Docker login
+      run: echo ${{ secrets.GH_BOT_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
+
+    - name: Docker build
+      run: docker build -t docker.pkg.github.com/a-shabanov/admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
+
+    - name: Docker push
+      run: docker push docker.pkg.github.com/a-shabanov/admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
