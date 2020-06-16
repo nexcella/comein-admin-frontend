@@ -20,11 +20,9 @@ module.exports = () => {
   }
   for (const key in process.env) {
     if (key.indexOf('APP_') === 0) {
-      envKeys[`process.env.${key}`] = JSON.stringify(process.env[key]);
+      envKeys[`process.env.${key.replace('APP_', '')}`] = JSON.stringify(process.env[key]);
     }
   }
-
-  console.debug({envKeys})
 
   const plugins = [
     new HtmlWebpackPlugin({
