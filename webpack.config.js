@@ -24,6 +24,8 @@ module.exports = () => {
     }
   }
 
+  console.debug({envKeys})
+
   const plugins = [
     new HtmlWebpackPlugin({
       template: "./public/index.html"

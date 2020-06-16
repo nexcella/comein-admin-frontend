@@ -33,7 +33,7 @@ jobs:
       env:
         CI: true
         NODE_ENV: production
-        APP_PKG_VERSION: $GITHUB_RUN_NUMBER
+        APP_VERSION: ${{$GITHUB_RUN_NUMBER}}
 
     - name: Docker login
       run: echo ${{ secrets.GH_BOT_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
