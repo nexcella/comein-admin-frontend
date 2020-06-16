@@ -56,16 +56,18 @@ jobs:
         CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         GIT_AUTHOR_NAME: ${{ secrets.GIT_BOT_USERNAME }}
+        GIT_AUTHOR_EMAIL: ${{ secrets.GIT_BOT_EMAIL }}
         GIT_COMMITTER_NAME: ${{ secrets.GIT_BOT_USERNAME }}
+        GIT_COMMITTER_EMAIL: ${{ secrets.GIT_BOT_EMAIL }}
 
     - name: Docker login
-      if: github.ref == 'refs/heads/master' && github.actor == 'semantic-release-bot'
+      if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
       run: echo ${{ secrets.GH_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
 
     - name: Docker build
-      if: github.ref == 'refs/heads/master' && github.actor == 'semantic-release-bot'
+      if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
       run: docker build -t docker.pkg.github.com/nexcella/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
 
     - name: Docker push
-      if: github.ref == 'refs/heads/master' && github.actor == 'semantic-release-bot'
+      if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
       run: docker push docker.pkg.github.com/nexcella/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
