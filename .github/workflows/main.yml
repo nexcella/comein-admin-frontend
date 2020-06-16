@@ -26,11 +26,13 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        npm ci
+        npm i
+        npm i --only=dev
         npm test
         npm run build --if-present
       env:
         CI: true
+        NODE_ENV: production
         APP_PKG_VERSION: $GITHUB_RUN_NUMBER
 
     - name: Docker login
