@@ -56,8 +56,8 @@ jobs:
 
     - name: Docker build
       if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
-      run: docker build -t docker.pkg.github.com/a-shabanov/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
+      run: docker build -t docker.pkg.github.com/nexcella/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
 
     - name: Docker push
       if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
-      run: docker push docker.pkg.github.com/a-shabanov/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
+      run: docker push docker.pkg.github.com/nexcella/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
