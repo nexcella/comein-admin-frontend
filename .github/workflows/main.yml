@@ -18,8 +18,11 @@ jobs:
       uses: tyankatsu0105/read-package-version-actions@v1
       id: package-version
 
-    - name: Configure npm
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" > ~/.npmrc
+    - name: Configure GH npm
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" >> ~/.npmrc
+
+    - name: Configure NPM
+      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
     - name: npm install, build, and test
       run: |
