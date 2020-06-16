@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/nexcella/comein-admin-frontend/compare/v1.3.1...v1.3.2) (2020-06-16)
+
+
+### Bug Fixes
+
+* **ci:** change committer name (semver) ([552e30c](https://github.com/nexcella/comein-admin-frontend/commit/552e30cbcd6c8f4a602ff11af1dcbe2413b971ee))
+
 ## [1.3.1](https://github.com/nexcella/comein-admin-frontend/compare/v1.3.0...v1.3.1) (2020-06-16)
 
 
