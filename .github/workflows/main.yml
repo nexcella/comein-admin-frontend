@@ -1,6 +1,9 @@
 name: Push CI
 
-on: [push]
+on:
+  push:
+    tags-ignore:
+      - 'v.*'
 
 env:
   APP_VERSION: ${{ github.run_number }}
@@ -50,6 +53,7 @@ jobs:
       env:
         CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GIT_COMMITTER_NAME: ${{ secrets.GIT_BOT_USERNAME }}
 
     - name: Docker login
       if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
