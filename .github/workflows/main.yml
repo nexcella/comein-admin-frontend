@@ -49,6 +49,7 @@ jobs:
       run: npm run semantic-release
       env:
         CI: true
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     - name: Docker login
       if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
