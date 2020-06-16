@@ -1,3 +1,30 @@
+# [1.3.0](https://github.com/nexcella/comein-admin-frontend/compare/v1.2.0...v1.3.0) (2020-06-16)
+
+
+### Features
+
+* **auth:** complete password auth ([3b4b853](https://github.com/nexcella/comein-admin-frontend/commit/3b4b8534beace749e0c21c869ea49ecb86a89976))
+* **ci:** add path ([43831bf](https://github.com/nexcella/comein-admin-frontend/commit/43831bfe7264af822bdd9e02728c1be527f67c65))
+* **ci:** fix nginx conf ([794ace3](https://github.com/nexcella/comein-admin-frontend/commit/794ace3de0594f28ad9201f2e4cbe8ebf1da6c05))
+* **ci:** fix secrets ([dd06ad6](https://github.com/nexcella/comein-admin-frontend/commit/dd06ad6d28453abf3b44b33fc0388bcb1b64a66e))
+* **ci:** fix version usage ([14e5f34](https://github.com/nexcella/comein-admin-frontend/commit/14e5f3486f22491cdf222cff508ba6fe75eb69c4))
+* **ci:** init actions ([2bcbef7](https://github.com/nexcella/comein-admin-frontend/commit/2bcbef78e0f6e95129ed4611f6378a69f931d51d))
+* **ci:** production build ([2609cbc](https://github.com/nexcella/comein-admin-frontend/commit/2609cbc571c61213a8906d70ffa57f50031c6830))
+* **ci:** production build / 2 ([aa68b81](https://github.com/nexcella/comein-admin-frontend/commit/aa68b81bd219405369e24b1f6776496af6ffe534))
+* **ci:** production build / 2 ([956ef70](https://github.com/nexcella/comein-admin-frontend/commit/956ef70667c2e4229e98abbeeea977a47dcd2cce))
+* **ci:** production build / 3 ([8d65f87](https://github.com/nexcella/comein-admin-frontend/commit/8d65f8702902b46bbbbf1f81e840733df40ae369))
+* **ci:** restore secrets ([0148988](https://github.com/nexcella/comein-admin-frontend/commit/0148988b79f4507aae062cc5d2325ef1635d9dce))
+* **ci:** restore secrets / 3 ([2bfb772](https://github.com/nexcella/comein-admin-frontend/commit/2bfb772da76b32b15f2eebd139bfc5468ab04d40))
+* **ci:** restore secrets / 4 ([df3a392](https://github.com/nexcella/comein-admin-frontend/commit/df3a392e48dd07a406534b1f5f5da6786d7b2bb3))
+* **ci:** restore secrets / 5 ([65fc651](https://github.com/nexcella/comein-admin-frontend/commit/65fc6513e6e681f4804e511be82e57c20b7fec7a))
+* **ci:** restore secrets / 5 ([4ae4f02](https://github.com/nexcella/comein-admin-frontend/commit/4ae4f024588eac680310a01f1f32571119bb7010))
+* **ci:** restore secrets /2 ([eecefba](https://github.com/nexcella/comein-admin-frontend/commit/eecefbac239e6d256207dd7d317cbf1378b91ff6))
+* **layout:** main layout ([242e5ab](https://github.com/nexcella/comein-admin-frontend/commit/242e5ab575e86a7c48abc97d47bfe2a6861f85fe))
+* **layout:** main router outlet ([0dacd5f](https://github.com/nexcella/comein-admin-frontend/commit/0dacd5f775efc87fa0a3310aa53a1a6ec02d8520))
+* **layout:** nested routing ([0f4ae07](https://github.com/nexcella/comein-admin-frontend/commit/0f4ae07795439c81c40676025d7dd48ea49a9de2))
+* **network:** fix token deserializer ([5360174](https://github.com/nexcella/comein-admin-frontend/commit/536017416115daeb4bea1e5afc141c0ca285179b))
+* **network:** network layer ([9df0043](https://github.com/nexcella/comein-admin-frontend/commit/9df00437d141a552ac3055f68032b9354c9edc07))
+
 # [1.2.0](https://github.com/a-shabanov/comein-admin-frontend/compare/v1.1.1...v1.2.0) (2020-04-08)
 
 
