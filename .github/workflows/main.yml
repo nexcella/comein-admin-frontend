@@ -5,7 +5,7 @@ on:
     branches:
       - '*'
     tags-ignore:
-      - 'v.*'
+      - '*'
 
 env:
   APP_VERSION: ${{ github.run_number }}
