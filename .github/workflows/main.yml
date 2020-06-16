@@ -26,6 +26,7 @@ jobs:
 
     - name: npm install, build, and test
       run: |
+        npm config set @nexcella:registry https://npm.pkg.github.com
         npm ci
         npm test
         npm run build --if-present
