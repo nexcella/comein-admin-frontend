@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/nexcella/comein-admin-frontend/compare/v1.3.0...v1.3.1) (2020-06-16)
+
+
+### Bug Fixes
+
+* **ci:** tag ignore on action ([4a1327e](https://github.com/nexcella/comein-admin-frontend/commit/4a1327ebcce0bdfa915555a1ce5e5c7580b73315))
+
 # [1.3.0](https://github.com/nexcella/comein-admin-frontend/compare/v1.2.0...v1.3.0) (2020-06-16)
 
 
