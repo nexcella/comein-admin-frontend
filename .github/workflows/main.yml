@@ -23,7 +23,7 @@ jobs:
 
     - name: Configure GH npm
       run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
         echo "@nexcella:registry=https://npm.pkg.github.com" >> ~/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
@@ -38,14 +38,20 @@ jobs:
         NODE_ENV: production
         APP_API_BASE_PATH: ${{ secrets.API_PATH }}
 
+    - name: Version
+      if: github.ref == 'refs/heads/master' && github.actor != 'nexcella-bot'
+      run: npm run semantic-release
+      env:
+        CI: true
+
     - name: Docker login
-      if: github.ref == 'refs/heads/master'
-      run: echo ${{ secrets.GH_BOT_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
+      if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
+      run: echo ${{ secrets.GH_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
 
     - name: Docker build
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
       run: docker build -t docker.pkg.github.com/a-shabanov/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
 
     - name: Docker push
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/master' && github.actor == 'nexcella-bot'
       run: docker push docker.pkg.github.com/a-shabanov/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
