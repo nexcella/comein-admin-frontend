@@ -19,14 +19,13 @@ jobs:
       id: package-version
 
     - name: Configure GH npm
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" >> ~/.npmrc
-
-    - name: Configure NPM
-      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+      run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_BOT_TOKEN }}" >> ~/.npmrc
+        echo "@nexcella:registry=https://npm.pkg.github.com" >> ~/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
     - name: npm install, build, and test
       run: |
-        npm config set @nexcella:registry https://npm.pkg.github.com
         npm ci
         npm test
         npm run build --if-present
