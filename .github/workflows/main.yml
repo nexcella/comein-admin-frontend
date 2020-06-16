@@ -37,7 +37,7 @@ jobs:
       run: echo ${{ secrets.GH_BOT_TOKEN }} | docker login docker.pkg.github.com -u nexcella-bot --password-stdin
 
     - name: Docker build
-      run: docker build -t docker.pkg.github.com/a-shabanov/admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
+      run: docker build -t docker.pkg.github.com/a-shabanov/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER .
 
     - name: Docker push
-      run: docker push docker.pkg.github.com/a-shabanov/admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
+      run: docker push docker.pkg.github.com/a-shabanov/comein-admin-frontend/app-package:${{ steps.package-version.outputs.version }}.$GITHUB_RUN_NUMBER
