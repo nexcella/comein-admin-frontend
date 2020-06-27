@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "astroturf";
+import {Link} from "react-router-dom";
+
 import {useVersion} from "../../providers/VersionProvider";
 import {Button} from "../ui-kit/Button";
-import {Link} from "react-router-dom";
+import {Loader} from "../ui-kit/Loader";
+import {useNetworkStore} from "../../stores/StoreProvider";
 
 const SidebarContainer = styled.aside`
   width: 290px;
@@ -22,12 +25,21 @@ const VersionContainer = styled.div`
   position: absolute;
   bottom: 10px;
   width: 100%;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  
+  & > svg {
+    height: 20px;
+  }
 `
 
 
 export function Sidebar() {
   const version = useVersion();
+  const {isLoading} = useNetworkStore();
 
   return <SidebarContainer>
     <Link to='/create-client'>
@@ -53,7 +65,8 @@ export function Sidebar() {
       <li>Партнёры</li>
     </ul>
     <VersionContainer>
-      Версия: {version}
+      <span>Версия: {version}</span>
+      {isLoading && <Loader fill='gray' size='small'/>}
     </VersionContainer>
   </SidebarContainer>
 }

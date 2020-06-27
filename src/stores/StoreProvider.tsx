@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 import {MobXProviderContext, observer} from "mobx-react";
 
 import {store} from "./RootStore";
-import {initStorage} from "./initStore";
+import {initStorage} from "./initStorage";
 import {AppStore, AppStoreKey} from "./AppStore";
 import {AuthStoreKey} from "./AuthStore";
 import {apiService} from "../services/api/ApiService";
+import {NetworkStore, NetworkStoreKey} from "./NetworkStore";
 
 const SHOW_LOADER_TIMEOUT = 200;
 
@@ -15,6 +16,10 @@ export function useStore() {
 
 export function useAppStore(): AppStore {
   return React.useContext(MobXProviderContext)[AppStoreKey];
+}
+
+export function useNetworkStore(): NetworkStore {
+  return React.useContext(MobXProviderContext)[NetworkStoreKey];
 }
 
 let loaderTimeoutId: number;
