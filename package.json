@@ -1,6 +1,6 @@
 {
   "name": "@nexcella/comein-web",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Web application for ComeIn admin panel",
   "contributors": [
     {
@@ -84,17 +84,32 @@
       "master"
     ],
     "plugins": [
-      ["@semantic-release/commit-analyzer", {
-        "preset": "angular",
-        "releaseRules": [
-          {"message": "*patch-release*", "release": "patch"},
-          {"messahe": "*minor-release*", "release": "minor"},
-          {"message": "*magor-release*", "release": "major"}
-        ],
-        "parserOpts": {
-          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "message": "*patch-release*",
+              "release": "patch"
+            },
+            {
+              "messahe": "*minor-release*",
+              "release": "minor"
+            },
+            {
+              "message": "*magor-release*",
+              "release": "major"
+            }
+          ],
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          }
         }
-      }],
+      ],
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/github",

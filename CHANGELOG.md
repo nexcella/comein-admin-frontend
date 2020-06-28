@@ -1,3 +1,21 @@
+# [1.4.0](https://github.com/nexcella/comein-admin-frontend/compare/v1.3.3...v1.4.0) (2020-06-28)
+
+
+### Bug Fixes
+
+* **network:** fix build trigger ([9b21018](https://github.com/nexcella/comein-admin-frontend/commit/9b21018733e8d4fc469b7d3a3483e1ef1f7a2529))
+* **network:** fix build trigger ([81e8659](https://github.com/nexcella/comein-admin-frontend/commit/81e8659b3be52b01ca16a4b1852af1e493782821))
+* **network:** fix build trigger ([7f236d7](https://github.com/nexcella/comein-admin-frontend/commit/7f236d728ba899de8995ada7e6683478b98fd42b))
+* **network:** fix error message logic ([ddb4424](https://github.com/nexcella/comein-admin-frontend/commit/ddb4424d73cfe5c11de06d49df8be0829e6545b9))
+* update network store usage ([68d2560](https://github.com/nexcella/comein-admin-frontend/commit/68d25602c6639d38e60ac80aeb326f04556a9608))
+
+
+### Features
+
+* add network loader ([3ac3a05](https://github.com/nexcella/comein-admin-frontend/commit/3ac3a05ff6885cc28dd01f7e491c440eb486db88))
+* add transport events callbacks ([31b0ff5](https://github.com/nexcella/comein-admin-frontend/commit/31b0ff5e291bc7fb909e7b4940c4bd224dc6f3ac))
+* show network state ([65bed57](https://github.com/nexcella/comein-admin-frontend/commit/65bed57a3ccc4076b29ba312a8d8f434135b31d0))
+
 ## [1.3.3](https://github.com/nexcella/comein-admin-frontend/compare/v1.3.2...v1.3.3) (2020-06-16)
 
 
