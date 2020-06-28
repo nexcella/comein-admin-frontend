@@ -84,10 +84,7 @@
       "master"
     ],
     "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "angular",
+      ["@semantic-release/commit-analyzer", {
           "releaseRules": [
             {
               "message": "*patch-release*",
