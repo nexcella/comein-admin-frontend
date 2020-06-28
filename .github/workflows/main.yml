@@ -1,12 +1,6 @@
 name: Push CI
 
-on:
-  push:
-    branches:
-      - '*'
-    tags-ignore:
-      - '*'
-
+on: [push]
 env:
   APP_VERSION: ${{ github.run_number }}
 

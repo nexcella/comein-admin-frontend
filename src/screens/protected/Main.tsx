@@ -5,13 +5,16 @@ import {useAuthActions, useAuthState} from "../../components/auth/AuthProvider";
 import {Header} from "../../components/header/Header";
 import {Sidebar} from "../../components/sidebar/Sidebar";
 import {Route, Switch} from "react-router-dom";
+import {NetworkState} from "../../components/network/NetworkState";
 
 const Wrapper = styled.div`
   display: flex;
 `
 
 const Content = styled.div`
-  padding: 12px;
+  position: relative;
+  padding: 48px 12px 12px;
+  width: 100%;
 `
 
 export function Main() {
@@ -22,6 +25,7 @@ export function Main() {
 
   return (
     <>
+      <NetworkState/>
       <Header/>
       <Wrapper>
         <Sidebar/>

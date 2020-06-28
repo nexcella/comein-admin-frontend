@@ -1,7 +1,6 @@
 import {action, observable} from 'mobx';
 import {format, ignore} from "mobx-sync";
 import {ApiService} from "../services/api/ApiService";
-import {TransportError} from "../services/network/transport/TransportError";
 import {ERRORS, ROLE} from '@nexcella/comein-api';
 
 export const AuthStoreKey = 'authStore';
@@ -52,27 +51,27 @@ export class AuthStore {
   login({username, password}: LoginData) {
     this.isLoading = true;
     this.apiService.auth.usernameLogin({username, password})
-      .then(({profile}) => {
-        const {id, token, username, refreshToken, ttl, roles} = profile;
-        this.profile = {id, username, roles};
-        this.token = token;
-        this.refreshToken = refreshToken;
-        this.tokenTtl = new Date(ttl);
-        this.isLoggedIn = true;
-        this.isLoading = false;
-      })
-      .catch(({data}: TransportError) => {
-        this.isLoading = false;
-        switch (data.code) {
-          case ERRORS.AUTH.INCORRECT_USERNAME:
-            this.error = 'incorrect_username';
-            break;
-          case ERRORS.VALIDATION.REQUEST:
-            this.error = 'validation';
-            break;
-          default:
-            this.error = 'internal'
+      .then((response) => {
+        if("success" in response) {
+          const {id, token, username, refreshToken, ttl, roles} = response.success.profile;
+          this.profile = {id, username, roles};
+          this.token = token;
+          this.refreshToken = refreshToken;
+          this.tokenTtl = new Date(ttl);
+          this.isLoggedIn = true;
+        } else {
+          switch (response.error.code) {
+            case ERRORS.AUTH.INCORRECT_USERNAME:
+              this.error = 'incorrect_username';
+              break;
+            case ERRORS.VALIDATION.REQUEST:
+              this.error = 'validation';
+              break;
+            default:
+              this.error = 'internal'
+          }
         }
+        this.isLoading = false;
       });
   }
 
@@ -87,17 +86,14 @@ export class AuthStore {
   @action.bound
   getProfile() {
     this.apiService.auth.profile()
-      .then(({user}) => {
-        this.profile = {
-          id: user.id,
-          username: user.username,
-          roles: user.roles,
-        }
-      })
-      .catch(({data}: TransportError) => {
-        switch (data.code) {
-          case ERRORS.FORBIDDEN.PERMISSION_DENIED:
-            this.logout();
+      .then((response) => {
+        if("success" in response) {
+          const user = response.success.user;
+          this.profile = {
+            id: user.id,
+            username: user.username,
+            roles: user.roles,
+          }
         }
       })
   }

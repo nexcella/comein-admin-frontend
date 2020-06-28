@@ -1,5 +1,7 @@
-export interface TransportInterface {
-  setToken(token: string): void
+import {ErrorData} from "@nexcella/comein-api";
 
-  request<R, D = undefined>(method: string, path: string, data?: D, options?: object): Promise<R>;
+export interface TransportInterface {
+  setToken(token?: string): void
+
+  request<R, D = undefined>(method: string, path: string, data?: D, options?: object): Promise<{ success: R } | { error: ErrorData }>;
 }
