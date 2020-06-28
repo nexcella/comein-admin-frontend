@@ -1,6 +1,7 @@
 import {AuthService} from "./AuthService";
 import {XHRTransport} from "../network/transport/XHRTransport";
 import {logger} from "../../utils/logger";
+import {TransportError} from "../network/transport/TransportError";
 
 export class ApiService {
   public auth: AuthService;
@@ -9,6 +10,18 @@ export class ApiService {
 
   constructor() {
     this.auth = new AuthService(this.transport);
+  }
+
+  public setOnRequestCallback(callback: (requestId: string,) => void) {
+    this.transport.setOnRequestCallback(callback);
+  }
+
+  public setOnRequestSuccessCallback(callback: (requestId: string,) => void) {
+    this.transport.setOnRequestSuccessCallback(callback);
+  }
+
+  public setOnRequestFailCallback(callback: (requestId: string,error: TransportError) => void) {
+    this.transport.setOnRequestFailCallback(callback);
   }
 
   public setToken(token?: string) {

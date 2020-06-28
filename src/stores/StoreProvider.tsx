@@ -19,7 +19,7 @@ export function useAppStore(): AppStore {
 }
 
 export function useNetworkStore(): NetworkStore {
-  return React.useContext(MobXProviderContext)[NetworkStoreKey];
+  return React.useContext(MobXProviderContext)[NetworkStoreKey]
 }
 
 let loaderTimeoutId: number;

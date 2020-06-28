@@ -5,10 +5,11 @@ export const NetworkStoreKey = 'networkStore';
 
 export class NetworkStore {
   @ignore
-  @observable isLoading = true;
+  @observable isLoading = false;
 
   @action
-  public setIsLoading(isLoading: boolean) {
+  public setIsLoading(requestId: string, isLoading: boolean) {
+    console.debug('setIsLoading', isLoading)
     this.isLoading = isLoading;
   }
 
