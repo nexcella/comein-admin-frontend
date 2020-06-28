@@ -1,6 +1,6 @@
 {
   "name": "@nexcella/comein-web",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Web application for ComeIn admin panel",
   "contributors": [
     {
@@ -84,7 +84,9 @@
       "master"
     ],
     "plugins": [
-      ["@semantic-release/commit-analyzer", {
+      [
+        "@semantic-release/commit-analyzer",
+        {
           "releaseRules": [
             {
               "message": "*patch-release*",

@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/nexcella/comein-admin-frontend/compare/v1.4.0...v1.5.0) (2020-06-28)
+
+
+### Features
+
+* **ci:** fix CI triggers ([ca2d6a1](https://github.com/nexcella/comein-admin-frontend/commit/ca2d6a124689f37240b00f4704af87270a1d8008))
+
 # [1.4.0](https://github.com/nexcella/comein-admin-frontend/compare/v1.3.3...v1.4.0) (2020-06-28)
 
 
