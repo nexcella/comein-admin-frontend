@@ -1,14 +1,14 @@
 import React, {ReactNode, useCallback, useEffect} from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom"
+import {useTranslation} from "react-i18next";
+import {reaction} from "mobx";
 import {observer} from "mobx-react";
 
 import {Auth} from "./screens/public/Auth";
 import {Main} from "./screens/protected/Main";
-import {logger} from "./utils/logger";
 import {useAuthState} from "./components/auth/AuthProvider";
-import {reaction} from "mobx";
 import {useAppStore} from "./stores/StoreProvider";
-import {useTranslation} from "react-i18next";
+import {logger} from "./utils/logger";
 
 interface ProtectedRouteProps {
   children: ReactNode,

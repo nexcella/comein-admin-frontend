@@ -18,10 +18,12 @@ apiService.setOnRequestCallback((requestId) => {
 })
 
 apiService.setOnRequestSuccessCallback((requestId) => {
+  networkStore.handleSuccess();
   networkStore.setIsLoading(requestId, false)
 })
 
 apiService.setOnRequestFailCallback((requestId, error: ErrorData) => {
+  networkStore.handleError();
   networkStore.setIsLoading(requestId, false);
   switch (error.code) {
     case ERRORS.FORBIDDEN.PERMISSION_DENIED:

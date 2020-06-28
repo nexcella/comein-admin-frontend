@@ -7,10 +7,22 @@ export class NetworkStore {
   @ignore
   @observable isLoading = false;
 
+  @ignore
+  @observable hasError = false;
+
   @action
   public setIsLoading(requestId: string, isLoading: boolean) {
-    console.debug('setIsLoading', isLoading)
     this.isLoading = isLoading;
+  }
+
+  @action
+  public handleSuccess() {
+    this.hasError = false;
+  }
+
+  @action
+  public handleError() {
+    this.hasError = true;
   }
 
 }

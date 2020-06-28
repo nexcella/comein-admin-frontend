@@ -12,10 +12,7 @@ export function useAuthState() {
     throw new Error('Incorrect useAuthState usage');
   }
   return useObserver(() => ({
-    isLoggedIn: authStore.isLoggedIn,
-    isLoading: authStore.isLoading,
-    profile: authStore.profile,
-    error: authStore.error
+    ...authStore
   }));
 }
 
