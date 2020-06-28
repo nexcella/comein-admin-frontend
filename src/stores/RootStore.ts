@@ -1,11 +1,13 @@
 import {action, observable} from "mobx";
 import {ignore} from "mobx-sync";
+import { ERRORS, ErrorData } from "@nexcella/comein-api";
 
 import {AppStore, AppStoreKey} from "./AppStore";
 import {AuthStore, AuthStoreKey} from "./AuthStore";
 import {NetworkStore, NetworkStoreKey} from "./NetworkStore";
 import {apiService} from "../services/api/ApiService";
-import {TransportError} from "../services/network/transport/TransportError";
+
+
 
 const appStore = new AppStore();
 const authStore = new AuthStore(apiService);
@@ -19,9 +21,12 @@ apiService.setOnRequestSuccessCallback((requestId) => {
   networkStore.setIsLoading(requestId, false)
 })
 
-apiService.setOnRequestFailCallback((requestId, error: TransportError) => {
+apiService.setOnRequestFailCallback((requestId, error: ErrorData) => {
   networkStore.setIsLoading(requestId, false);
-  console.debug({error});
+  switch (error.code) {
+    case ERRORS.FORBIDDEN.PERMISSION_DENIED:
+      authStore.logout();
+  }
 })
 
 export class RootStore {

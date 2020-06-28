@@ -1,11 +1,9 @@
 import axios, {AxiosInstance, Method} from "axios";
 import {nanoid} from "nanoid";
-
+import {ErrorData, ERRORS, SuccessResponse} from "@nexcella/comein-api"
 import {TransportInterface} from "./TransportInterface";
 import {config} from "../../../config/app";
 import {logger} from "../../../utils/logger";
-import {ERRORS, SuccessResponse} from "@nexcella/comein-api";
-import {TransportError} from "./TransportError";
 import {getVersion} from "../../../utils/version";
 
 
@@ -13,7 +11,7 @@ export class XHRTransport implements TransportInterface {
   private axios: AxiosInstance;
   private onRequestCallback?: (requestId: string) => void;
   private onRequestSuccessCallback?: (requestId: string) => void;
-  private onRequestFailCallback?: (requestId: string, error: TransportError) => void;
+  private onRequestFailCallback?: (requestId: string, error: ErrorData) => void;
 
   constructor() {
     this.axios = axios.create({
@@ -40,11 +38,11 @@ export class XHRTransport implements TransportInterface {
     this.onRequestSuccessCallback = callback;
   }
 
-  public setOnRequestFailCallback(callback: (requestId: string, error: TransportError) => void) {
+  public setOnRequestFailCallback(callback: (requestId: string, error: ErrorData) => void) {
     this.onRequestFailCallback = callback;
   }
 
-  public request<T, R>(method: Method, url: string, data?: T, options?: object): Promise<R> {
+  public request<T, R>(method: Method, url: string, data?: T, options?: object): Promise<{ success: R } | { error: ErrorData }> {
     const requestId = `${nanoid(16)}-1`
     this.axios.defaults.headers.common['x-requestid'] = requestId;
     logger.debug(`[transport] -> ${requestId} - ${url}`);
@@ -58,16 +56,19 @@ export class XHRTransport implements TransportInterface {
         if (this.onRequestSuccessCallback) {
           this.onRequestSuccessCallback(requestId);
         }
-        return response.data.data
+        return {
+          success: response.data.data
+        }
       })
       .catch((error) => {
         logger.debug(`[transport] <- x ${requestId} - ${error.response?.data?.data?.code ?? 'n/a'} - ${error.response?.status} - ${error.message}`);
         const errorData = error.response?.data?.data ?? {code: ERRORS.COMMON.INTERNAL, message: error.message}
-        const throwError = new TransportError(errorData);
         if (this.onRequestFailCallback) {
-          this.onRequestFailCallback(requestId, throwError);
+          this.onRequestFailCallback(requestId, errorData);
         }
-        throw throwError
+        return {
+          error: errorData
+        }
       });
   }
 

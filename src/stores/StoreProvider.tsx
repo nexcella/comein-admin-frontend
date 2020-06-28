@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {MobXProviderContext, observer} from "mobx-react";
+import {MobXProviderContext, observer, useObserver} from "mobx-react";
 
 import {store} from "./RootStore";
 import {initStorage} from "./initStorage";
@@ -19,7 +19,14 @@ export function useAppStore(): AppStore {
 }
 
 export function useNetworkStore(): NetworkStore {
-  return React.useContext(MobXProviderContext)[NetworkStoreKey]
+  const networkStore = React.useContext(MobXProviderContext)[NetworkStoreKey];
+  if (!networkStore) {
+    throw new Error('Incorrect useNetworkStore usage');
+  }
+  return useObserver(() => ({
+    ...networkStore
+  }));
+
 }
 
 let loaderTimeoutId: number;

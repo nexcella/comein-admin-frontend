@@ -32,7 +32,9 @@ const VersionContainer = styled.div`
   flex-direction: row;
   
   & > svg {
+    position: absolute;
     height: 20px;
+    left: 12px;
   }
 `
 

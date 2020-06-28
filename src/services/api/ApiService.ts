@@ -1,7 +1,8 @@
+import {ErrorData} from "@nexcella/comein-api";
+
 import {AuthService} from "./AuthService";
 import {XHRTransport} from "../network/transport/XHRTransport";
 import {logger} from "../../utils/logger";
-import {TransportError} from "../network/transport/TransportError";
 
 export class ApiService {
   public auth: AuthService;
@@ -20,7 +21,7 @@ export class ApiService {
     this.transport.setOnRequestSuccessCallback(callback);
   }
 
-  public setOnRequestFailCallback(callback: (requestId: string,error: TransportError) => void) {
+  public setOnRequestFailCallback(callback: (requestId: string,error: ErrorData) => void) {
     this.transport.setOnRequestFailCallback(callback);
   }
 
