@@ -84,7 +84,17 @@
       "master"
     ],
     "plugins": [
-      "@semantic-release/commit-analyzer",
+      ["@semantic-release/commit-analyzer", {
+        "preset": "angular",
+        "releaseRules": [
+          {"message": "*patch-release*", "release": "patch"},
+          {"messahe": "*minor-release*", "release": "minor"},
+          {"message": "*magor-release*", "release": "magor"}
+        ],
+        "parserOpts": {
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+        }
+      }],
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/github",
