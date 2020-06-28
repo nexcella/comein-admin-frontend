@@ -23,11 +23,14 @@ apiService.setOnRequestSuccessCallback((requestId) => {
 })
 
 apiService.setOnRequestFailCallback((requestId, error: ErrorData) => {
-  networkStore.handleError();
   networkStore.setIsLoading(requestId, false);
   switch (error.code) {
     case ERRORS.FORBIDDEN.PERMISSION_DENIED:
       authStore.logout();
+      break;
+    case ERRORS.COMMON.INTERNAL:
+      networkStore.handleError();
+      break;
   }
 })
 
