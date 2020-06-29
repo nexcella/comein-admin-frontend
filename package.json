@@ -87,26 +87,25 @@
       [
         "@semantic-release/commit-analyzer",
         {
-          "releaseRules": [
-            {
-              "message": "*patch-release*",
-              "release": "patch"
-            },
-            {
-              "messahe": "*minor-release*",
-              "release": "minor"
-            },
-            {
-              "message": "*magor-release*",
+        "preset": "eslint",
+        "releaseRules": [
+          {
+            "subject": "*",
+            "release": false
+          },
+          {
+            "message": "PATCH-RELEASE:*",
+            "release": "patch"
+          },
+          {
+            "messahe": "MINOR-RELEASE:*",
+            "release": "minor"
+          },
+          {
+            "message": "MAJOR-RELEASE:*",
               "release": "major"
             }
-          ],
-          "parserOpts": {
-            "noteKeywords": [
-              "BREAKING CHANGE",
-              "BREAKING CHANGES"
-            ]
-          }
+          ]
         }
       ],
       "@semantic-release/release-notes-generator",
