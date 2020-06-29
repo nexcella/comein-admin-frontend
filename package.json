@@ -48,6 +48,7 @@
     "@types/webpack": "4.41.18",
     "@types/webpack-dev-server": "3.11.0",
     "astroturf": "0.10.4",
+    "conventional-changelog-eslint": "^3.0.8",
     "dotenv": "8.2.0",
     "file-loader": "6.0.0",
     "html-webpack-plugin": "4.3.0",
@@ -87,22 +88,22 @@
       [
         "@semantic-release/commit-analyzer",
         {
-        "preset": "eslint",
-        "releaseRules": [
-          {
-            "subject": "*",
-            "release": false
-          },
-          {
-            "message": "PATCH-RELEASE:*",
-            "release": "patch"
-          },
-          {
-            "messahe": "MINOR-RELEASE:*",
-            "release": "minor"
-          },
-          {
-            "message": "MAJOR-RELEASE:*",
+          "preset": "eslint",
+          "releaseRules": [
+            {
+              "subject": "*",
+              "release": false
+            },
+            {
+              "message": "PATCH-RELEASE:*",
+              "release": "patch"
+            },
+            {
+              "messahe": "MINOR-RELEASE:*",
+              "release": "minor"
+            },
+            {
+              "message": "MAJOR-RELEASE:*",
               "release": "major"
             }
           ]
