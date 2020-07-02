@@ -15,10 +15,11 @@ i18n
         translation: {
           button: {
             login: 'Войти',
-            register: 'Зарегистрироваться'
+            register: 'Зарегистрироваться',
+            forgotPassword: 'Восстановить пароль'
           },
           label: {
-            username: 'Email',
+            username: 'E-mail',
             password: 'Пароль',
             phone: 'Телефон',
             name: 'Ваше имя'
@@ -46,7 +47,7 @@ i18n
             register: 'Sign Up'
           },
           label: {
-            username: 'Email',
+            username: 'E-mail',
             password: 'Password',
             phone: 'Phone',
             name: 'Your name'

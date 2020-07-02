@@ -10,6 +10,7 @@ import {useAuthState} from "./components/auth/AuthProvider";
 import {useAppStore} from "./stores/StoreProvider";
 import {logger} from "./utils/logger";
 import {Register} from "./screens/public/Register";
+import {Forgot} from "./screens/public/Forgot";
 
 interface ProtectedRouteProps {
   children: ReactNode,
@@ -60,6 +61,7 @@ export function Router() {
       <Switch>
         <Route path='/auth' component={Auth}/>
         <Route path='/register' component={Register}/>
+        <Route path='/forgot' component={Forgot}/>
         <ProtectedRoute path='/'>
           <Main/>
         </ProtectedRoute>

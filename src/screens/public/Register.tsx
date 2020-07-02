@@ -7,25 +7,7 @@ import {useAuthState} from "../../components/auth/AuthProvider";
 import {Logo} from "../../components/logo/Logo";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 import {RegisterForm} from "../../components/auth/RegisterForm";
-
-const AuthScreen = styled.div`
-  display: flex;
-`;
-
-const AuthWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: space-between;
-  min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100);
-  flex-grow: 1;
-  margin-top: 20px;
-  
-  @media (min-width: 1050px) {
-    min-width: 570px;
-  }
-`
+import {PublicWrapper} from "./PublicWrapper";
 
 const FormWrapper = styled.div`
   width: 250px;
@@ -51,18 +33,6 @@ const RegisterLink = styled(Link)`
   text-decoration: none;
 `
 
-const Background = styled.div`
-  background: linear-gradient(90deg, #4FACFE, #237CCB);
-  width: 100%;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  flex-grow: 3;
-  @media (max-width: 1050px) {
-    display: none;
-  }
-`;
-
-
 const GoogleLoginWrapper = styled.div`
   margin: 20px 0;
   & button {
@@ -81,24 +51,21 @@ export const Register = () => {
   }
 
   return (
-    <AuthScreen>
-      <AuthWrapper>
-        <div/>
-        <FormWrapper>
-          <Logo/>
-          <Subtitle>личный кабинет организатора</Subtitle>
-          <GoogleLoginWrapper>
-            <GoogleLoginButton register/>
-          </GoogleLoginWrapper>
-          <Label>или</Label>
-          <RegisterForm/>
-        </FormWrapper>
-        <RegisterWrapper>
-          Уже зарегистрированы?<br/>
-          <RegisterLink to='/auth'>Войти в аккаунт</RegisterLink>
-        </RegisterWrapper>
-      </AuthWrapper>
-      <Background/>
-    </AuthScreen>
+    <PublicWrapper>
+      <div/>
+      <FormWrapper>
+        <Logo/>
+        <Subtitle>личный кабинет организатора</Subtitle>
+        <GoogleLoginWrapper>
+          <GoogleLoginButton register/>
+        </GoogleLoginWrapper>
+        <Label>или</Label>
+        <RegisterForm/>
+      </FormWrapper>
+      <RegisterWrapper>
+        Уже зарегистрированы?<br/>
+        <RegisterLink to='/auth'>Войти в аккаунт</RegisterLink>
+      </RegisterWrapper>
+    </PublicWrapper>
   );
 };

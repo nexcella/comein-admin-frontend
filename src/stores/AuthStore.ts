@@ -22,6 +22,9 @@ export type RegisterData = {
   password: string,
 }
 
+export type ForgotData = {
+  username: string,
+}
 
 export class AuthStore {
   @ignore

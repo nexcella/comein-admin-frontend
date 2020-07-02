@@ -29,7 +29,6 @@ const ErrorWrapper = styled.div`
   color: #EB7575;
   font-size: 14px;
   position: absolute;
-  padding: 0 12px;
   text-transform: lowercase;
 `;
 
@@ -62,7 +61,7 @@ export function Input(
 ) {
 
   const hasError = showError && error?.length > 0;
-  console.debug(name, value, {error, hasError});
+
   return (
     <InputWrapper>
       <InputElement
