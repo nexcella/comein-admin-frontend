@@ -15,6 +15,14 @@ export type LoginData = {
   password: string
 }
 
+export type RegisterData = {
+  name: string,
+  username: string,
+  phone: string,
+  password: string,
+}
+
+
 export class AuthStore {
   @ignore
   @observable isLoading = false;

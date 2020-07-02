@@ -3,7 +3,7 @@ import styled from "astroturf";
 import {useTranslation} from "react-i18next";
 import {object as yupObject, string as yupString} from 'yup';
 import {useAuthActions, useAuthState} from "./AuthProvider";
-import {LoginData} from "../../stores/AuthStore";
+import {RegisterData} from "../../stores/AuthStore";
 import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
 import {Button} from "../ui-kit/Button";
@@ -12,7 +12,7 @@ import {ErrorLabel} from "../error/ErrorLabel";
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 20px 0;
   & > div:first-child input {
     margin-top: 0;
   }
@@ -21,24 +21,29 @@ const FormWrapper = styled.form`
   }
 `
 
-export function AuthForm() {
+export function RegisterForm() {
   const authState = useAuthState();
   const authActions = useAuthActions();
   const {t} = useTranslation();
 
   const validationSchema = yupObject().shape({
-    username: yupString().required(t('validation.required')),
+    name: yupString().required(t('validation.required')),
+    username: yupString().required(t('validation.required')).email(t('validation.email')),
     password: yupString().required(t('validation.required'))
   });
 
-  const formik = useFormik<LoginData>({
+  const formik = useFormik<RegisterData>({
+    validateOnChange: true,
     validationSchema,
     initialValues: {
+      name: '',
       username: '',
+      phone: '',
       password: ''
     },
-    onSubmit: ({username, password}) => {
-      authActions.login({username, password});
+    onSubmit: (registerData) => {
+      console.debug('submit')
+      //authActions.usernameRegistration(registerData);
     }
   });
 
@@ -48,6 +53,17 @@ export function AuthForm() {
   return (
     <FormWrapper onSubmit={formik.handleSubmit}>
       <Input
+        value={formik.values.name}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        autocomplete='name'
+        name='name'
+        placeholder={t('label.name')}
+        showError={formik.touched.name}
+        error={formik.errors.name}
+        required
+      />
+      <Input
         value={formik.values.username}
         onChange={formik.handleChange}
         autocomplete='username'
@@ -55,12 +71,24 @@ export function AuthForm() {
         placeholder={t('label.username')}
         showError={formik.touched.username}
         error={formik.errors.username}
+        onBlur={formik.handleBlur}
         required
+      />
+      <Input
+        value={formik.values.phone}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        autocomplete='phone'
+        name='phone'
+        placeholder={t('label.phone')}
+        showError={formik.touched.phone}
+        error={formik.errors.phone}
       />
       <Input
         type='password'
         value={formik.values.password}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         autocomplete='current-password'
         name='password'
         placeholder={t('label.password')}
@@ -72,7 +100,7 @@ export function AuthForm() {
       <Button
         disabled={!isValid || isLoading}
         pending={isLoading}
-        text={t('button.login')}
+        text={t('button.register')}
       />
     </FormWrapper>
   )

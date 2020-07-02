@@ -5,8 +5,8 @@ import styled from "astroturf";
 
 import {useAuthState} from "../../components/auth/AuthProvider";
 import {Logo} from "../../components/logo/Logo";
-import {AuthForm} from "../../components/auth/AuthForm";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
+import {RegisterForm} from "../../components/auth/RegisterForm";
 
 const AuthScreen = styled.div`
   display: flex;
@@ -20,7 +20,8 @@ const AuthWrapper = styled.div`
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   flex-grow: 1;
-  margin-top: 12px;
+  margin-top: 20px;
+  
   @media (min-width: 1050px) {
     min-width: 570px;
   }
@@ -40,17 +41,6 @@ const Subtitle = styled.span`
   width: 200px;
 `
 
-const ForgotLinkWrapper = styled.div`
-  text-align: right;
-  margin-top: 10px;
-`
-
-const ForgotLink = styled(Link)`
-  font-size: 14px;
-  color: #45A5F9;
-  text-decoration: none;
-`;
-
 const RegisterWrapper = styled.div`
   padding-bottom: 32px;
   color: #5F5E5E;
@@ -65,6 +55,7 @@ const Background = styled.div`
   background: linear-gradient(90deg, #4FACFE, #237CCB);
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   flex-grow: 3;
   @media (max-width: 1050px) {
     display: none;
@@ -83,7 +74,7 @@ const Label = styled.span`
   color: #5F5E5E;
 `
 
-export const Auth = () => {
+export const Register = () => {
   const authState = useAuthState();
   if (authState.isLoggedIn) {
     return <Redirect to="/"/>
@@ -97,17 +88,14 @@ export const Auth = () => {
           <Logo/>
           <Subtitle>личный кабинет организатора</Subtitle>
           <GoogleLoginWrapper>
-            <GoogleLoginButton/>
+            <GoogleLoginButton register/>
           </GoogleLoginWrapper>
           <Label>или</Label>
-          <AuthForm/>
-          <ForgotLinkWrapper>
-            <ForgotLink to='/forgot'>забыли пароль?</ForgotLink>
-          </ForgotLinkWrapper>
+          <RegisterForm/>
         </FormWrapper>
         <RegisterWrapper>
-          Нет аккаунта?<br/>
-          <RegisterLink to='/register'>Создайте своё первое мероприятие</RegisterLink>
+          Уже зарегистрированы?<br/>
+          <RegisterLink to='/auth'>Войти в аккаунт</RegisterLink>
         </RegisterWrapper>
       </AuthWrapper>
       <Background/>

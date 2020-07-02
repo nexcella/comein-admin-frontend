@@ -9,6 +9,7 @@ import {Main} from "./screens/protected/Main";
 import {useAuthState} from "./components/auth/AuthProvider";
 import {useAppStore} from "./stores/StoreProvider";
 import {logger} from "./utils/logger";
+import {Register} from "./screens/public/Register";
 
 interface ProtectedRouteProps {
   children: ReactNode,
@@ -57,9 +58,8 @@ export function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/auth'>
-          <Auth/>
-        </Route>
+        <Route path='/auth' component={Auth}/>
+        <Route path='/register' component={Register}/>
         <ProtectedRoute path='/'>
           <Main/>
         </ProtectedRoute>

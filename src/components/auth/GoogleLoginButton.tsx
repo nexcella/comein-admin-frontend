@@ -2,7 +2,7 @@ import React from "react";
 import {GoogleLogin} from 'react-google-login';
 import {config} from "../../config/app";
 
-export function GoogleLoginButton() {
+export function GoogleLoginButton({register = false}: {register?: boolean}) {
   return (
     <GoogleLogin
       clientId={String(config.googleClientId)}
@@ -10,7 +10,7 @@ export function GoogleLoginButton() {
         console.error({res})
       }}
       onSuccess={(res) => console.debug({res})}
-      buttonText='Войти с помощью Google'
+      buttonText={register ? 'Регистрация с Google': 'Войти с помощью Google'}
     />
   );
 }
