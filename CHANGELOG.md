@@ -1,3 +1,19 @@
+## [1.5.1](https://github.com/nexcella/comein-admin-frontend/compare/v1.5.0...v1.5.1) (2020-07-14)
+
+
+### Bug Fixes
+
+* **ci:** change ci build trigger ([a72152e](https://github.com/nexcella/comein-admin-frontend/commit/a72152e5dadc0c2f8978404acd18f51e5273f190))
+
+
+### Features
+
+* **ci:** change rules for commit analyzer ([83b24f2](https://github.com/nexcella/comein-admin-frontend/commit/83b24f2f099a5588d5423db7a9b8ffb933e81b45))
+* **ci:** update deps and rules ([11f4967](https://github.com/nexcella/comein-admin-frontend/commit/11f4967d892fa1874cf69382dc7767d7b796f591))
+* **register:** add forgot password form ([a2e7ca8](https://github.com/nexcella/comein-admin-frontend/commit/a2e7ca833c054f022ee24df8caa927488b5e2bc7))
+* **register:** add form and profile checking ([551b276](https://github.com/nexcella/comein-admin-frontend/commit/551b276d40a6a6026c7bbb6f264b5812ac31eb79))
+* **register:** add registration form ([10491ad](https://github.com/nexcella/comein-admin-frontend/commit/10491ad7706461e39882c6b57b3f80cca8b274b5))
+
 # [1.5.0](https://github.com/nexcella/comein-admin-frontend/compare/v1.4.0...v1.5.0) (2020-06-28)
 
 
