@@ -95,15 +95,15 @@
               "release": false
             },
             {
-              "message": "PATCH-RELEASE:*",
+              "subject": "PATCH-RELEASE:*",
               "release": "patch"
             },
             {
-              "messahe": "MINOR-RELEASE:*",
+              "subject": "MINOR-RELEASE:*",
               "release": "minor"
             },
             {
-              "message": "MAJOR-RELEASE:*",
+              "subject": "MAJOR-RELEASE:*",
               "release": "major"
             }
           ]
