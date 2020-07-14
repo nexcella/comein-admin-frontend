@@ -1,14 +1,18 @@
 import {action, observable} from 'mobx';
 import {format, ignore} from "mobx-sync";
 import {ApiService} from "../services/api/ApiService";
-import {ERRORS, ROLE} from '@nexcella/comein-api';
+import {ERRORS, Profile as ProfileResponse, ROLE} from '@nexcella/comein-api';
+import {UsernameRegisterDto} from "@nexcella/comein-api/dist";
 
 export const AuthStoreKey = 'authStore';
 
 export type Profile = {
   id: string,
   username: string,
+  name: string,
+  phone: string,
   roles: ROLE[]
+  isAdmin: boolean
 }
 export type LoginData = {
   username: string,
@@ -61,15 +65,11 @@ export class AuthStore {
   @action.bound
   login({username, password}: LoginData) {
     this.isLoading = true;
+    this.error = undefined;
     this.apiService.auth.usernameLogin({username, password})
       .then((response) => {
-        if("success" in response) {
-          const {id, token, username, refreshToken, ttl, roles} = response.success.profile;
-          this.profile = {id, username, roles};
-          this.token = token;
-          this.refreshToken = refreshToken;
-          this.tokenTtl = new Date(ttl);
-          this.isLoggedIn = true;
+        if ("success" in response) {
+          this.setProfile(response.success.profile);
         } else {
           switch (response.error.code) {
             case ERRORS.AUTH.INCORRECT_USERNAME:
@@ -87,6 +87,29 @@ export class AuthStore {
   }
 
   @action.bound
+  usernameRegister(data: UsernameRegisterDto) {
+    this.isLoading = true;
+    this.error = undefined;
+    this.apiService.auth.usernameRegister({...data, autologin: true}).then((response) => {
+      if ("success" in response) {
+        this.setProfile(response.success.profile);
+      } else {
+        switch (response.error.code) {
+          case ERRORS.AUTH.USER_ALREADY_EXIST:
+            this.error = 'user_exist';
+            break;
+          case ERRORS.VALIDATION.REQUEST:
+            this.error = 'validation';
+            break;
+          default:
+            this.error = 'internal'
+        }
+      }
+      this.isLoading = false;
+    })
+  }
+
+  @action.bound
   logout() {
     this.isLoggedIn = false;
     this.isLoading = false;
@@ -98,15 +121,25 @@ export class AuthStore {
   getProfile() {
     this.apiService.auth.profile()
       .then((response) => {
-        if("success" in response) {
-          const user = response.success.user;
+        if ("success" in response) {
           this.profile = {
-            id: user.id,
-            username: user.username,
-            roles: user.roles,
-          }
+            ...response.success.profile,
+            isAdmin: response.success.profile.roles.includes('admin')
+          };
+
         }
       })
+  }
+
+  private setProfile(profile: ProfileResponse) {
+    const {id, token, username, name, phone, refreshToken, ttl, roles = []} = profile;
+    this.profile = {id, username, roles, name, phone, isAdmin: roles.includes('admin')};
+    if (token && ttl) {
+      this.token = token;
+      this.refreshToken = refreshToken;
+      this.tokenTtl = new Date(ttl);
+      this.isLoggedIn = true;
+    }
   }
 
 }

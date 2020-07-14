@@ -42,8 +42,7 @@ export function RegisterForm() {
       password: ''
     },
     onSubmit: (registerData) => {
-      console.debug('submit')
-      //authActions.usernameRegistration(registerData);
+      authActions.usernameRegister(registerData);
     }
   });
 
