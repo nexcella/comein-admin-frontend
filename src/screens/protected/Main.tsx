@@ -34,17 +34,18 @@ export function Main() {
             <Route path='/' exact render={() => (
               <>
                 <div>Home</div>
-                {profile?.id}<br/>
-                {profile?.username}<br/>
-                {profile?.name}<br/>
-                {profile?.phone}<br/>
-                {profile?.roles}
-                <LogoutButton>Logout</LogoutButton>
               </>
             )}/>
             <Route path='/clients' render={() => <div>list of clients</div>}/>
             <Route path='/create-client' render={() => <div>create client</div>}/>
-            <Route path='/settings' render={() => <div>settings</div>}/>
+            <Route path='/settings' render={() => <div>
+              {profile?.id}<br/>
+              {profile?.username}<br/>
+              {profile?.name}<br/>
+              {profile?.phone}<br/>
+              {profile?.roles}
+              <LogoutButton>Logout</LogoutButton>
+            </div>}/>
             <Route path='*' render={() => <div>404</div>}/>
           </Switch>
         </Content>
