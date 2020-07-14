@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, FocusEvent} from "react";
 import styled from "astroturf";
 
 const InputWrapper = styled.div`
@@ -29,7 +29,6 @@ const ErrorWrapper = styled.div`
   color: #EB7575;
   font-size: 14px;
   position: absolute;
-  padding: 0 12px;
   text-transform: lowercase;
 `;
 
@@ -39,9 +38,11 @@ type InputProps = {
   autocomplete?: string
   type?: 'text' | 'password',
   onChange: (e: ChangeEvent) => void
+  onBlur?: (event: FocusEvent) => void
   value: string
   showError?: boolean
   error?: string
+  required?: boolean
 }
 
 export function Input(
@@ -51,9 +52,11 @@ export function Input(
     autocomplete,
     type = 'text',
     onChange,
+    onBlur,
     value,
     error = '',
-    showError = false
+    showError = false,
+    required = false
   }: InputProps
 ) {
 
@@ -66,8 +69,9 @@ export function Input(
         type={type}
         name={name}
         autoComplete={autocomplete}
-        placeholder={placeholder}
+        placeholder={placeholder + (required ? ' *' : '')}
         onChange={onChange}
+        onBlur={onBlur}
         value={value}
       />
       {hasError && (

@@ -36,6 +36,8 @@ export function Main() {
                 <div>Home</div>
                 {profile?.id}<br/>
                 {profile?.username}<br/>
+                {profile?.name}<br/>
+                {profile?.phone}<br/>
                 {profile?.roles}
                 <LogoutButton>Logout</LogoutButton>
               </>

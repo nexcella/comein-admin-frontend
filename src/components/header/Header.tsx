@@ -1,17 +1,21 @@
 import React from 'react';
-import styled from "astroturf";
+import styled, {StyledComponent} from "astroturf";
 import {Logo} from "../logo/Logo";
 import {useAuthState} from "../auth/AuthProvider";
 import {UserButton} from "./UserButton";
 import {Link} from "react-router-dom";
 
-const HeaderBackground = styled.header`
+const HeaderBackground: StyledComponent<"header", {isAdmin?: boolean}> = styled.header`
   width: 100%;
   height: 150px;
-  background: linear-gradient(90deg, #FFAE48 0%, #FF7E48 100%);
+  background: linear-gradient(90deg, #46D4DA 0%, #1DB5D8 100%);;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  
+  &.isAdmin {
+    background: linear-gradient(90deg, #FFAE48 0%, #FF7E48 100%);
+  }
 `
 
 const LogoWrapper = styled.div`
@@ -25,7 +29,7 @@ const LogoWrapper = styled.div`
 export function Header() {
   const {profile} = useAuthState();
   return (
-    <HeaderBackground>
+    <HeaderBackground isAdmin={profile?.isAdmin}>
       <LogoWrapper>
         <Link to='/'>
           <Logo inline/>

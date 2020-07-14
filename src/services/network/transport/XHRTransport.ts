@@ -26,7 +26,7 @@ export class XHRTransport implements TransportInterface {
     if (token) {
       this.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     } else {
-      this.axios.defaults.headers.common['Authorization'] = undefined;
+      delete axios.defaults.headers.common['Authorization'];
     }
   }
 
