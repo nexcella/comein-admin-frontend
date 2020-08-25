@@ -37,8 +37,7 @@ export function ForgotForm() {
       username: '',
     },
     onSubmit: (forgotData) => {
-      console.debug('submit')
-      //authActions.usernameForgot(forgotData);
+      authActions.usernameForgot(forgotData);
     }
   });
 

@@ -1,6 +1,14 @@
-import {MyProfileResponse, UsernameLoginDto, UsernameLoginResponse, UsernameRegisterDto} from "@nexcella/comein-api";
+import {
+  MyProfileResponse,
+  UsernameForgotDto,
+  UsernameForgotResponse,
+  UsernameLoginDto,
+  UsernameLoginResponse,
+  UsernameRegisterDto,
+  UsernameRegisterResponse
+} from "@nexcella/comein-api";
 import {NetworkService} from "../network/NetworkService";
-import {UsernameRegisterResponse} from "@nexcella/comein-api/dist";
+
 
 export class AuthService extends NetworkService {
 
@@ -10,6 +18,10 @@ export class AuthService extends NetworkService {
 
   usernameRegister(data: UsernameRegisterDto) {
     return this.transport.request<UsernameRegisterResponse, UsernameRegisterDto>('POST', '/register/username', data);
+  }
+
+  usernameForgot(data: UsernameForgotDto) {
+    return this.transport.request<UsernameForgotResponse, UsernameForgotDto>('POST', '/auth/usernameForgot', data);
   }
 
   profile() {

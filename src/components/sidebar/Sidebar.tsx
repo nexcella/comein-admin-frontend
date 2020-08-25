@@ -3,7 +3,6 @@ import styled from "astroturf";
 import {Link} from "react-router-dom";
 
 import {useVersion} from "../../providers/VersionProvider";
-import {Button} from "../ui-kit/Button";
 import {Loader} from "../ui-kit/Loader";
 import {useNetworkStore} from "../../stores/StoreProvider";
 
@@ -43,21 +42,18 @@ export function Sidebar() {
   const version = useVersion();
   const {isLoading} = useNetworkStore();
 
-  return <SidebarContainer>
-    <Link to='/create-client'>
-      <Button text='Создать клиента'/>
-    </Link>
-    <br/><br/>
-    Календарь <br/>
-    <Link to='/clients'>
-    <span style={{color: 'black'}}>Клиенты</span><br/>
-    </Link>
-    События<br/>
-    Оплаты
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+  return (
+    <SidebarContainer>
+      Календарь <br/>
+      <Link to='/clients'>
+        <span style={{color: 'black'}}>Клиенты</span><br/>
+      </Link>
+      События<br/>
+      Оплаты
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     <ul>
       <li>Программа</li>
       <li>Инфо</li>
@@ -71,4 +67,5 @@ export function Sidebar() {
       {isLoading && <Loader fill='gray' size='small'/>}
     </VersionContainer>
   </SidebarContainer>
+  )
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {StyledComponent} from "astroturf";
 import {Logo} from "../logo/Logo";
-import {useAuthState} from "../auth/AuthProvider";
+import {useAuthActions, useAuthState} from "../auth/AuthProvider";
 import {UserButton} from "./UserButton";
 import {Link} from "react-router-dom";
 
@@ -35,7 +35,7 @@ export function Header() {
           <Logo inline/>
         </Link>
       </LogoWrapper>
-      {profile && <UserButton profile={profile}/>}
+      <UserButton/>
     </HeaderBackground>
   )
 }
