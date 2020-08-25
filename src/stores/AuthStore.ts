@@ -1,8 +1,7 @@
 import {action, observable} from 'mobx';
 import {format, ignore} from "mobx-sync";
 import {ApiService} from "../services/api/ApiService";
-import {ERRORS, Profile as ProfileResponse, ROLE} from '@nexcella/comein-api';
-import {UsernameRegisterDto} from "@nexcella/comein-api/dist";
+import {ERRORS, Profile as ProfileResponse, ROLE, UsernameRegisterDto} from '@nexcella/comein-api';
 
 export const AuthStoreKey = 'authStore';
 

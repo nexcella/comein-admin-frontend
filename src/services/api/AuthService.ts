@@ -1,6 +1,14 @@
-import {MyProfileResponse, UsernameLoginDto, UsernameLoginResponse, UsernameRegisterDto} from "@nexcella/comein-api";
+import {
+  MyProfileResponse,
+  UsernameForgotDto,
+  UsernameForgotResponse,
+  UsernameLoginDto,
+  UsernameLoginResponse,
+  UsernameRegisterDto,
+  UsernameRegisterResponse
+} from "@nexcella/comein-api";
 import {NetworkService} from "../network/NetworkService";
-import {UsernameRegisterResponse, UsernameForgotResponse, UsernameForgotDto} from "@nexcella/comein-api";
+
 
 export class AuthService extends NetworkService {
 
