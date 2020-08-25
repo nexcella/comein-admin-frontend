@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link, Redirect} from "react-router-dom"
 
 import styled from "astroturf";
 
-import {useAuthState} from "../../components/auth/AuthProvider";
+import {useAuthActions, useAuthState} from "../../components/auth/AuthProvider";
 import {Logo} from "../../components/logo/Logo";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 import {RegisterForm} from "../../components/auth/RegisterForm";
@@ -46,6 +46,12 @@ const Label = styled.span`
 
 export const Register = () => {
   const authState = useAuthState();
+  const authActions = useAuthActions();
+
+  useEffect(() => {
+    authActions.clear();
+  }, [authActions.clear])
+
   if (authState.isLoggedIn) {
     return <Redirect to="/"/>
   }

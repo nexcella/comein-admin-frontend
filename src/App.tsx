@@ -4,7 +4,6 @@ import {css} from 'astroturf';
 import {VersionProvider} from "./providers/VersionProvider";
 import {Router} from "./Router";
 import {StoreProvider} from "./stores/StoreProvider";
-import {AuthProvider} from "./components/auth/AuthProvider";
 import {ErrorBoundary} from "./components/error/ErrorBoundary";
 
 import './i18n';
@@ -23,9 +22,7 @@ export function App() {
     <ErrorBoundary>
       <VersionProvider css={styles}>
         <StoreProvider>
-          <AuthProvider>
-            <Router/>
-          </AuthProvider>
+          <Router/>
         </StoreProvider>
       </VersionProvider>
     </ErrorBoundary>

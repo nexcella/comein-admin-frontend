@@ -1,13 +1,11 @@
 import React, {useContext} from "react";
-import {useObserver} from 'mobx-react';
+import {MobXProviderContext, useObserver} from 'mobx-react';
 
 import {AuthStore, AuthStoreKey} from "../../stores/AuthStore";
-import {useStore} from "../../stores/StoreProvider";
 
-const AuthContext = React.createContext<AuthStore | undefined>(undefined);
 
 export function useAuthState() {
-  const authStore = useContext(AuthContext);
+  const authStore = useContext(MobXProviderContext)[AuthStoreKey];
   if (!authStore) {
     throw new Error('Incorrect useAuthState usage');
   }
@@ -18,12 +16,13 @@ export function useAuthState() {
     isLoading: authStore.isLoading,
     error: authStore.error,
     isLoggedIn: authStore.isLoggedIn,
-    token: authStore.token
+    token: authStore.token,
+    successForgotEmail: authStore.successForgotEmail
   }));
 }
 
 export function useAuthActions() {
-  const authStore = useContext(AuthContext);
+  const authStore: AuthStore = useContext(MobXProviderContext)[AuthStoreKey];
   if (!authStore) {
     throw new Error('Incorrect useAuthActions usage');
   }
@@ -32,10 +31,7 @@ export function useAuthActions() {
     logout: authStore.logout,
     getProfile: authStore.getProfile,
     usernameRegister: authStore.usernameRegister,
+    usernameForgot: authStore.usernameForgot,
+    clear: authStore.clear
   }
 }
-
-export const AuthProvider = (props: any) => {
-  const store = useStore();
-  return <AuthContext.Provider value={store[AuthStoreKey]}>{props.children}</AuthContext.Provider>
-};

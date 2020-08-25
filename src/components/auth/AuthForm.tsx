@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "astroturf";
 import {useTranslation} from "react-i18next";
 import {object as yupObject, string as yupString} from 'yup';
@@ -25,6 +25,10 @@ export function AuthForm() {
   const authState = useAuthState();
   const authActions = useAuthActions();
   const {t} = useTranslation();
+
+  useEffect(() => {
+    authActions.clear();
+  }, [authActions.clear])
 
   const validationSchema = yupObject().shape({
     username: yupString().required(t('validation.required')),

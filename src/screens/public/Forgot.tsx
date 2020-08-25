@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {PublicWrapper} from "./PublicWrapper";
 import {Logo} from "../../components/logo/Logo";
 import styled from "astroturf";
 import {Link} from "react-router-dom";
 import {ForgotForm} from "../../components/auth/ForgotForm";
+import {useAuthActions, useAuthState} from "../../components/auth/AuthProvider";
 
 
 const Subtitle = styled.span`
@@ -18,6 +19,10 @@ const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+`
+
+const SuccessMessage = styled.div`
+  margin: 12px auto;
 `
 
 const RegisterWrapper = styled.div`
@@ -37,6 +42,13 @@ const PageTitle = styled.div`
 `
 
 export function Forgot() {
+  const {successForgotEmail} = useAuthState();
+  const authActions = useAuthActions();
+
+  useEffect(() => {
+    authActions.clear();
+  }, [authActions.clear])
+
   return (<PublicWrapper>
     <div/>
     <FormWrapper>
@@ -44,7 +56,12 @@ export function Forgot() {
       <Subtitle>личный кабинет организатора</Subtitle>
       <div>
         <PageTitle>Забыли пароль?</PageTitle>
-        <ForgotForm/>
+        {!successForgotEmail ? (
+          <ForgotForm/>
+        ) : (
+          <SuccessMessage>Иструкция для восстановления пароля отправлена Вам на почту</SuccessMessage>
+        )
+        }
       </div>
     </FormWrapper>
     <RegisterWrapper>

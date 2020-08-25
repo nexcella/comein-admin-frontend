@@ -39,6 +39,8 @@ export class AuthStore {
 
   @observable isLoggedIn = false;
 
+  @observable successForgotEmail = false
+
   @format(
     (hash) => hash ? atob(hash) : undefined,
     (token?: string) => token ? btoa(token) : undefined
@@ -90,23 +92,44 @@ export class AuthStore {
   usernameRegister(data: UsernameRegisterDto) {
     this.isLoading = true;
     this.error = undefined;
-    this.apiService.auth.usernameRegister({...data, autologin: true}).then((response) => {
-      if ("success" in response) {
-        this.setProfile(response.success.profile);
-      } else {
-        switch (response.error.code) {
-          case ERRORS.AUTH.USER_ALREADY_EXIST:
-            this.error = 'user_exist';
-            break;
-          case ERRORS.VALIDATION.REQUEST:
-            this.error = 'validation';
-            break;
-          default:
-            this.error = 'internal'
+    this.apiService.auth.usernameRegister({...data, autologin: true})
+      .then((response) => {
+        if ("success" in response) {
+          this.setProfile(response.success.profile);
+        } else {
+          switch (response.error.code) {
+            case ERRORS.AUTH.USER_ALREADY_EXIST:
+              this.error = 'user_exist';
+              break;
+            case ERRORS.VALIDATION.REQUEST:
+              this.error = 'validation';
+              break;
+            default:
+              this.error = 'internal'
+          }
         }
-      }
-      this.isLoading = false;
-    })
+      })
+      .finally(() => {
+        this.isLoading = false
+      })
+  }
+
+  @action.bound
+  usernameForgot(data: ForgotData) {
+    this.isLoading = true;
+    this.error = undefined;
+    this.apiService.auth.usernameForgot(data)
+      .then((res) => console.debug({res}))
+      .finally(() => {
+        this.isLoading = false
+        this.successForgotEmail = true;
+      })
+  }
+
+  @action.bound
+  clear() {
+    this.successForgotEmail = false;
+    this.error = undefined
   }
 
   @action.bound
@@ -115,6 +138,7 @@ export class AuthStore {
     this.isLoading = false;
     this.profile = undefined;
     this.token = undefined;
+    // @TODO request logout from service
   }
 
   @action.bound

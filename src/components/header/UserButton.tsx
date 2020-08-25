@@ -3,6 +3,7 @@ import styled from "astroturf";
 import {Link} from "react-router-dom";
 
 import {Profile} from "../../stores/AuthStore";
+import {useAuthState} from "../auth/AuthProvider";
 
 const UserButtonWrapper = styled.div`
   display: flex;
@@ -40,12 +41,13 @@ const UsernameWrapper = styled.span`
   margin-left: 12px;
 `
 
-export function UserButton({profile}: { profile: Profile }) {
+export function UserButton() {
+  const {profile} = useAuthState();
   return (
     <UserButtonWrapper>
       <Link to='/settings'>
         <Button>
-          <AvatarPlaceholder>{profile.username[0]}</AvatarPlaceholder>
+          <AvatarPlaceholder>{profile?.username[0]}</AvatarPlaceholder>
           <UsernameWrapper>Настройки аккаунта</UsernameWrapper>
         </Button>
       </Link>
