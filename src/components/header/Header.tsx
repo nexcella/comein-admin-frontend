@@ -1,21 +1,17 @@
 import React from 'react';
-import styled, {StyledComponent} from "astroturf";
+import styled from "astroturf";
 import {Logo} from "../logo/Logo";
 import {useAuthStore} from "../../providers/StoreProvider";
 import {UserButton} from "./UserButton";
 import {Link} from "react-router-dom";
 
-const HeaderBackground: StyledComponent<"header", {isAdmin?: boolean}> = styled.header`
+const HeaderBackground = styled.header`
   width: 100%;
   height: 150px;
-  background: linear-gradient(90deg, #46D4DA 0%, #1DB5D8 100%);;
+  background: linear-gradient(90deg, var(--support-color) 0%, var(--primary-color) 100%);;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
-  &.isAdmin {
-    background: linear-gradient(90deg, #FFAE48 0%, #FF7E48 100%);
-  }
 `
 
 const LogoWrapper = styled.div`
