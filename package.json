@@ -18,7 +18,7 @@
     "@nexcella/comein-api": "0.0.13",
     "@nexcella/logger": "1.0.0",
     "@types/yup": "0.29.6",
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "formik": "2.1.5",
     "i18next": "19.7.0",
     "i18next-browser-languagedetector": "5.0.0",
