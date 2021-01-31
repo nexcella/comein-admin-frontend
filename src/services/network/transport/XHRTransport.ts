@@ -61,7 +61,7 @@ export class XHRTransport implements TransportInterface {
         }
       })
       .catch((error) => {
-        logger.debug(`[transport] <- x ${requestId} - ${error.response?.data?.data?.code ?? 'n/a'} - ${error.response?.status} - ${error.message}`);
+        logger.debug(`[transport] <- ${requestId} - ${error.response?.data?.data?.code ?? 'n/a'} - ${error.response?.status} - ${error.message}`);
         const errorData = error.response?.data?.data ?? {code: ERRORS.COMMON.INTERNAL, message: error.message}
         if (this.onRequestFailCallback) {
           this.onRequestFailCallback(requestId, errorData);

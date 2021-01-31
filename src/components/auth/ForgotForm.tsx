@@ -2,8 +2,8 @@ import React from "react";
 import styled from "astroturf";
 import {useTranslation} from "react-i18next";
 import {object as yupObject, string as yupString} from 'yup';
-import {useAuthActions, useAuthState} from "./AuthProvider";
-import {ForgotData, RegisterData} from "../../stores/AuthStore";
+import {useAuthStore} from "../../providers/StoreProvider";
+import {ForgotData} from "../../stores/AuthStore";
 import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
 import {Button} from "../ui-kit/Button";
@@ -22,8 +22,7 @@ const FormWrapper = styled.form`
 `
 
 export function ForgotForm() {
-  const authState = useAuthState();
-  const authActions = useAuthActions();
+  const authState = useAuthStore();
   const {t} = useTranslation();
 
   const validationSchema = yupObject().shape({
@@ -37,7 +36,7 @@ export function ForgotForm() {
       username: '',
     },
     onSubmit: (forgotData) => {
-      authActions.usernameForgot(forgotData);
+      authState.usernameForgot(forgotData);
     }
   });
 

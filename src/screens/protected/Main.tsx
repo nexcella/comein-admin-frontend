@@ -1,11 +1,12 @@
 import React, {useEffect} from "react";
 import styled from "astroturf";
 import {LogoutButton} from "../../components/auth/LogoutButton";
-import {useAuthActions, useAuthState} from "../../components/auth/AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 import {Header} from "../../components/header/Header";
 import {Sidebar} from "../../components/sidebar/Sidebar";
 import {Route, Switch} from "react-router-dom";
 import {NetworkState} from "../../components/network/NetworkState";
+import {observer} from "mobx-react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,11 +18,10 @@ const Content = styled.div`
   width: 100%;
 `
 
-export function Main() {
-  const {profile} = useAuthState()
-  const {getProfile} = useAuthActions();
+export const Main = observer(function Main() {
+  const authStore = useAuthStore()
 
-  useEffect(getProfile, []);
+  useEffect(() => authStore.getProfile(), [authStore.getProfile]);
 
   return (
     <>
@@ -39,11 +39,11 @@ export function Main() {
             <Route path='/clients' render={() => <div>list of clients</div>}/>
             <Route path='/create-client' render={() => <div>create client</div>}/>
             <Route path='/settings' render={() => <div>
-              {profile?.id}<br/>
-              {profile?.username}<br/>
-              {profile?.name}<br/>
-              {profile?.phone}<br/>
-              {profile?.roles}
+              {authStore.profile?.id}<br/>
+              {authStore.profile?.username}<br/>
+              {authStore.profile?.name}<br/>
+              {authStore.profile?.phone}<br/>
+              {authStore.profile?.roles}
               <LogoutButton>Logout</LogoutButton>
             </div>}/>
             <Route path='*' render={() => <div>404</div>}/>
@@ -52,4 +52,4 @@ export function Main() {
       </Wrapper>
     </>
   )
-}
+});

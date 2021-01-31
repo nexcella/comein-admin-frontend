@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "astroturf";
-import {useNetworkStore} from "../../stores/StoreProvider";
+import {useStore} from "../../providers/StoreProvider";
 
 const NetworkStateWrapper = styled.div`
   position: absolute;
@@ -16,10 +16,10 @@ const NetworkStateWrapper = styled.div`
 `
 
 export function NetworkState() {
-  const {hasError} = useNetworkStore();
+  const store = useStore();
 
   return <>
-    {hasError && (
+    {store.networkStore.hasError && (
       <NetworkStateWrapper>
         Произошла ошибка получения данных. Проверьте сетевое соединение и попробуйте снова.
       </NetworkStateWrapper>

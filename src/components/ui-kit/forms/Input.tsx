@@ -65,7 +65,7 @@ export function Input(
   return (
     <InputWrapper>
       <InputElement
-        error={hasError}
+        error={Boolean(hasError)}
         type={type}
         name={name}
         autoComplete={autocomplete}

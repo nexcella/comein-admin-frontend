@@ -1,8 +1,8 @@
 import {AsyncStorage, AsyncTrunk} from "mobx-sync";
 import localForage from "localforage";
 
-import {store} from "./RootStore";
-import {logger} from "../utils/logger";
+import {store} from "../RootStore";
+import {logger} from "../../utils/logger";
 
 const STORAGE_KEY = '__persist_stores_';
 

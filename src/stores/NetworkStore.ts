@@ -1,8 +1,6 @@
 import {action, observable} from "mobx";
 import {ignore} from "mobx-sync";
 
-export const NetworkStoreKey = 'networkStore';
-
 export class NetworkStore {
   @ignore
   @observable isLoading = false;

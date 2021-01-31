@@ -2,7 +2,7 @@ import React from "react";
 import styled from "astroturf";
 import {useTranslation} from "react-i18next";
 import {object as yupObject, string as yupString} from 'yup';
-import {useAuthActions, useAuthState} from "./AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 import {RegisterData} from "../../stores/AuthStore";
 import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
@@ -22,8 +22,7 @@ const FormWrapper = styled.form`
 `
 
 export function RegisterForm() {
-  const authState = useAuthState();
-  const authActions = useAuthActions();
+  const authState = useAuthStore();
   const {t} = useTranslation();
 
   const validationSchema = yupObject().shape({
@@ -42,7 +41,7 @@ export function RegisterForm() {
       password: ''
     },
     onSubmit: (registerData) => {
-      authActions.usernameRegister(registerData);
+      authState.usernameRegister(registerData);
     }
   });
 

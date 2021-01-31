@@ -2,8 +2,7 @@ import React from "react";
 import styled from "astroturf";
 import {Link} from "react-router-dom";
 
-import {Profile} from "../../stores/AuthStore";
-import {useAuthState} from "../auth/AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 
 const UserButtonWrapper = styled.div`
   display: flex;
@@ -42,7 +41,7 @@ const UsernameWrapper = styled.span`
 `
 
 export function UserButton() {
-  const {profile} = useAuthState();
+  const {profile} = useAuthStore();
   return (
     <UserButtonWrapper>
       <Link to='/settings'>

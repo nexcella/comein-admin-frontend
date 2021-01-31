@@ -3,7 +3,7 @@ import React from "react";
 import {css} from 'astroturf';
 import {VersionProvider} from "./providers/VersionProvider";
 import {Router} from "./Router";
-import {StoreProvider} from "./stores/StoreProvider";
+import {StoreProvider} from "./providers/StoreProvider";
 import {ErrorBoundary} from "./components/error/ErrorBoundary";
 
 import './i18n';
@@ -19,12 +19,14 @@ const styles = css`
 
 export function App() {
   return (
-    <ErrorBoundary>
-      <VersionProvider css={styles}>
-        <StoreProvider>
-          <Router/>
-        </StoreProvider>
-      </VersionProvider>
-    </ErrorBoundary>
+    <div css={styles}>
+      <ErrorBoundary>
+        <VersionProvider>
+          <StoreProvider>
+            <Router/>
+          </StoreProvider>
+        </VersionProvider>
+      </ErrorBoundary>
+    </div>
   )
 }

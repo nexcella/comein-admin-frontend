@@ -1,10 +1,11 @@
 import React, {ReactNode} from "react";
-import {useAuthActions} from "./AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 
 export const LogoutButton = ({children}: { children: ReactNode }) => {
-  const {logout} = useAuthActions();
+  const authStore = useAuthStore();
+
   return (
-    <button onClick={() => logout()}>
+    <button onClick={authStore.logout}>
       {children}
     </button>
   );

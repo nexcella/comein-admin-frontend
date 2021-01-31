@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {StyledComponent} from "astroturf";
 import {Logo} from "../logo/Logo";
-import {useAuthActions, useAuthState} from "../auth/AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 import {UserButton} from "./UserButton";
 import {Link} from "react-router-dom";
 
@@ -27,9 +27,9 @@ const LogoWrapper = styled.div`
 `
 
 export function Header() {
-  const {profile} = useAuthState();
+  const authStore = useAuthStore();
   return (
-    <HeaderBackground isAdmin={profile?.isAdmin}>
+    <HeaderBackground isAdmin={authStore.profile?.isAdmin}>
       <LogoWrapper>
         <Link to='/'>
           <Logo inline/>

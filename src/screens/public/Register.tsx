@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom"
 
 import styled from "astroturf";
 
-import {useAuthActions, useAuthState} from "../../components/auth/AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 import {Logo} from "../../components/logo/Logo";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 import {RegisterForm} from "../../components/auth/RegisterForm";
@@ -45,12 +45,11 @@ const Label = styled.span`
 `
 
 export const Register = () => {
-  const authState = useAuthState();
-  const authActions = useAuthActions();
+  const authState = useAuthStore();
 
   useEffect(() => {
-    authActions.clear();
-  }, [authActions.clear])
+    authState.clear();
+  }, [authState.clear])
 
   if (authState.isLoggedIn) {
     return <Redirect to="/"/>

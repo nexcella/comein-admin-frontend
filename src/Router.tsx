@@ -6,11 +6,11 @@ import {observer} from "mobx-react";
 
 import {Auth} from "./screens/public/Auth";
 import {Main} from "./screens/protected/Main";
-import {useAuthState} from "./components/auth/AuthProvider";
-import {useAppStore} from "./stores/StoreProvider";
+import {useAuthStore} from "./providers/StoreProvider";
 import {logger} from "./utils/logger";
 import {Register} from "./screens/public/Register";
 import {Forgot} from "./screens/public/Forgot";
+import {useStore} from "./providers/StoreProvider";
 
 interface ProtectedRouteProps {
   children: ReactNode,
@@ -19,7 +19,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = observer(({children, path, exact = false}: ProtectedRouteProps) => {
-  const {isLoggedIn} = useAuthState();
+  const {isLoggedIn} = useAuthStore();
   const render = useCallback(({location}) => {
     if (isLoggedIn) {
       return children
@@ -38,7 +38,7 @@ const ProtectedRoute = observer(({children, path, exact = false}: ProtectedRoute
 });
 
 export function Router() {
-  const appStore = useAppStore();
+  const {appStore} = useStore();
   const {i18n} = useTranslation();
 
   useEffect(() => {

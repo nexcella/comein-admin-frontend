@@ -1,13 +1,11 @@
 import {action, observable} from "mobx";
 import {ignore} from "mobx-sync";
-import { ERRORS, ErrorData } from "@nexcella/comein-api";
+import {ERRORS, ErrorData} from "@nexcella/comein-api";
 
-import {AppStore, AppStoreKey} from "./AppStore";
-import {AuthStore, AuthStoreKey} from "./AuthStore";
-import {NetworkStore, NetworkStoreKey} from "./NetworkStore";
+import {AppStore} from "./AppStore";
+import {AuthStore} from "./AuthStore";
+import {NetworkStore} from "./NetworkStore";
 import {apiService} from "../services/api/ApiService";
-
-
 
 const appStore = new AppStore();
 const authStore = new AuthStore(apiService);
@@ -37,9 +35,9 @@ apiService.setOnRequestFailCallback((requestId, error: ErrorData) => {
 export class RootStore {
   @ignore @observable storeLoaded = false;
 
-  [AuthStoreKey] = authStore;
-  [AppStoreKey] = appStore;
-  [NetworkStoreKey] = networkStore
+  public readonly auth = authStore;
+  public readonly appStore = appStore;
+  public readonly networkStore = networkStore
 
   @action setStoreLoaded() {
     this.storeLoaded = true;

@@ -2,12 +2,13 @@ import React, {useEffect} from "react";
 import styled from "astroturf";
 import {useTranslation} from "react-i18next";
 import {object as yupObject, string as yupString} from 'yup';
-import {useAuthActions, useAuthState} from "./AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 import {LoginData} from "../../stores/AuthStore";
 import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
 import {Button} from "../ui-kit/Button";
 import {ErrorLabel} from "../error/ErrorLabel";
+import {observer} from "mobx-react";
 
 const FormWrapper = styled.form`
   display: flex;
@@ -21,14 +22,13 @@ const FormWrapper = styled.form`
   }
 `
 
-export function AuthForm() {
-  const authState = useAuthState();
-  const authActions = useAuthActions();
+export const AuthForm = observer(function AuthForm() {
+  const authState = useAuthStore();
   const {t} = useTranslation();
 
   useEffect(() => {
-    authActions.clear();
-  }, [authActions.clear])
+    authState.clear();
+  }, [authState.clear])
 
   const validationSchema = yupObject().shape({
     username: yupString().required(t('validation.required')),
@@ -42,7 +42,7 @@ export function AuthForm() {
       password: ''
     },
     onSubmit: ({username, password}) => {
-      authActions.login({username, password});
+      authState.login({username, password});
     }
   });
 
@@ -80,4 +80,4 @@ export function AuthForm() {
       />
     </FormWrapper>
   )
-}
+})

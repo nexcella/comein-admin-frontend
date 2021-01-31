@@ -1,9 +1,7 @@
-import {action, observable} from 'mobx';
+import {action, makeObservable, observable, runInAction} from 'mobx';
 import {format, ignore} from "mobx-sync";
 import {ApiService} from "../services/api/ApiService";
 import {ERRORS, Profile as ProfileResponse, ROLE, UsernameRegisterDto} from '@nexcella/comein-api';
-
-export const AuthStoreKey = 'authStore';
 
 export type Profile = {
   id: string,
@@ -60,60 +58,65 @@ export class AuthStore {
   private apiService: ApiService;
 
   constructor(apiService: ApiService) {
+    makeObservable(this);
     this.apiService = apiService;
   }
 
-  @action.bound
+  @action
   login({username, password}: LoginData) {
     this.isLoading = true;
     this.error = undefined;
     this.apiService.auth.usernameLogin({username, password})
       .then((response) => {
-        if ("success" in response) {
-          this.setProfile(response.success.profile);
-        } else {
-          switch (response.error.code) {
-            case ERRORS.AUTH.INCORRECT_USERNAME:
-              this.error = 'incorrect_username';
-              break;
-            case ERRORS.VALIDATION.REQUEST:
-              this.error = 'validation';
-              break;
-            default:
-              this.error = 'internal'
+        runInAction(() => {
+          if ("success" in response) {
+            this.setProfile(response.success.profile);
+          } else {
+            switch (response.error.code) {
+              case ERRORS.AUTH.INCORRECT_USERNAME:
+                this.error = 'incorrect_username';
+                break;
+              case ERRORS.VALIDATION.REQUEST:
+                this.error = 'validation';
+                break;
+              default:
+                this.error = 'internal'
+            }
           }
-        }
-        this.isLoading = false;
+          this.isLoading = false;
+        })
       });
   }
 
-  @action.bound
+  @action
   usernameRegister(data: UsernameRegisterDto) {
     this.isLoading = true;
     this.error = undefined;
     this.apiService.auth.usernameRegister({...data, autologin: true})
       .then((response) => {
-        if ("success" in response) {
-          this.setProfile(response.success.profile);
-        } else {
-          switch (response.error.code) {
-            case ERRORS.AUTH.USER_ALREADY_EXIST:
-              this.error = 'user_exist';
-              break;
-            case ERRORS.VALIDATION.REQUEST:
-              this.error = 'validation';
-              break;
-            default:
-              this.error = 'internal'
+        runInAction(() => {
+          if ("success" in response) {
+            this.setProfile(response.success.profile);
+          } else {
+            switch (response.error.code) {
+              case ERRORS.AUTH.USER_ALREADY_EXIST:
+                this.error = 'user_exist';
+                break;
+              case ERRORS.VALIDATION.REQUEST:
+                this.error = 'validation';
+                break;
+              default:
+                this.error = 'internal'
+            }
           }
-        }
+        })
       })
       .finally(() => {
         this.isLoading = false
       })
   }
 
-  @action.bound
+  @action
   usernameForgot(data: ForgotData) {
     this.isLoading = true;
     this.error = undefined;
@@ -125,13 +128,13 @@ export class AuthStore {
       })
   }
 
-  @action.bound
+  @action
   clear() {
     this.successForgotEmail = false;
     this.error = undefined
   }
 
-  @action.bound
+  @action
   logout() {
     this.isLoggedIn = false;
     this.isLoading = false;
@@ -140,7 +143,7 @@ export class AuthStore {
     // @TODO request logout from service
   }
 
-  @action.bound
+  @action
   getProfile() {
     this.apiService.auth.profile()
       .then((response) => {
@@ -154,6 +157,7 @@ export class AuthStore {
       })
   }
 
+  @action
   private setProfile(profile: ProfileResponse) {
     const {id, token, username, name, phone, refreshToken, ttl, roles = []} = profile;
     this.profile = {id, username, roles, name, phone, isAdmin: roles.includes('admin')};

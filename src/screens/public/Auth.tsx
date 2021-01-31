@@ -3,11 +3,12 @@ import {Link, Redirect} from "react-router-dom"
 
 import styled from "astroturf";
 
-import {useAuthState} from "../../components/auth/AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 import {Logo} from "../../components/logo/Logo";
 import {AuthForm} from "../../components/auth/AuthForm";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 import {PublicWrapper} from "./PublicWrapper";
+import {observer} from "mobx-react";
 
 const FormWrapper = styled.div`
   width: 250px;
@@ -55,8 +56,8 @@ const Label = styled.span`
   color: #5F5E5E;
 `
 
-export const Auth = () => {
-  const authState = useAuthState();
+export const Auth = observer(function Auth() {
+  const authState = useAuthStore();
   if (authState.isLoggedIn) {
     return <Redirect to="/"/>
   }
@@ -82,4 +83,4 @@ export const Auth = () => {
       </RegisterWrapper>
     </PublicWrapper>
   );
-};
+});

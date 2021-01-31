@@ -4,7 +4,7 @@ import {Logo} from "../../components/logo/Logo";
 import styled from "astroturf";
 import {Link} from "react-router-dom";
 import {ForgotForm} from "../../components/auth/ForgotForm";
-import {useAuthActions, useAuthState} from "../../components/auth/AuthProvider";
+import {useAuthStore} from "../../providers/StoreProvider";
 
 
 const Subtitle = styled.span`
@@ -42,12 +42,11 @@ const PageTitle = styled.div`
 `
 
 export function Forgot() {
-  const {successForgotEmail} = useAuthState();
-  const authActions = useAuthActions();
+  const authState = useAuthStore();
 
   useEffect(() => {
-    authActions.clear();
-  }, [authActions.clear])
+    authState.clear();
+  }, [authState.clear])
 
   return (<PublicWrapper>
     <div/>
@@ -56,7 +55,7 @@ export function Forgot() {
       <Subtitle>личный кабинет организатора</Subtitle>
       <div>
         <PageTitle>Забыли пароль?</PageTitle>
-        {!successForgotEmail ? (
+        {!authState.successForgotEmail ? (
           <ForgotForm/>
         ) : (
           <SuccessMessage>Иструкция для восстановления пароля отправлена Вам на почту</SuccessMessage>
