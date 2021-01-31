@@ -38,16 +38,16 @@ const ProtectedRoute = observer(({children, path, exact = false}: ProtectedRoute
 });
 
 export function Router() {
-  const {appStore} = useStore();
+  const store = useStore();
   const {i18n} = useTranslation();
 
   useEffect(() => {
-    logger.debug(`App locale: ${appStore.locale}`);
-    i18n.changeLanguage(appStore.locale)
+    logger.debug(`App locale: ${store.appStore.locale}`);
+    i18n.changeLanguage(store.appStore.locale)
   }, [])
 
   reaction(
-    () => appStore.locale,
+    () => store.appStore.locale,
     locale => {
       i18n.changeLanguage(locale).then(() => {
         logger.debug(`Change locale: ${locale}`);
