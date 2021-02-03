@@ -1,5 +1,6 @@
 import React from "react";
 import {GoogleLogin} from 'react-google-login';
+
 import {config} from "../../config/app";
 
 export function GoogleLoginButton({register = false}: {register?: boolean}) {

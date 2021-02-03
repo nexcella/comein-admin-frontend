@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import {useVersion} from "../../providers/VersionProvider";
 import {Loader} from "../ui-kit/Loader";
-import {useStore} from "../../providers/StoreProvider";
+import {useNetworkStore} from "../../providers/StoreProvider";
 
 const SidebarContainer = styled.aside`
   width: 290px;
@@ -40,7 +40,7 @@ const VersionContainer = styled.div`
 
 export function Sidebar() {
   const version = useVersion();
-  const store = useStore();
+  const networkStore = useNetworkStore();
 
   return (
     <SidebarContainer>
@@ -64,7 +64,7 @@ export function Sidebar() {
     </ul>
     <VersionContainer>
       <span>Версия: {version}</span>
-      {store.networkStore.isLoading && <Loader fill='gray' size='small'/>}
+      {networkStore.isLoading && <Loader fill='gray' size='small'/>}
     </VersionContainer>
   </SidebarContainer>
   )

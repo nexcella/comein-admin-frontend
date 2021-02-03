@@ -1,12 +1,16 @@
-import {action, observable} from "mobx";
+import {action, makeAutoObservable} from "mobx";
 import {ignore} from "mobx-sync";
 
 export class NetworkStore {
   @ignore
-  @observable isLoading = false;
+  isLoading = false;
 
   @ignore
-  @observable hasError = false;
+  hasError = false;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
 
   @action
   public setIsLoading(requestId: string, isLoading: boolean) {

@@ -8,20 +8,23 @@ import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
 import {Button} from "../ui-kit/Button";
 import {ErrorLabel} from "../error/ErrorLabel";
+import {observer} from "mobx-react-lite";
 
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   margin: 20px 0;
+
   & > div:first-child input {
     margin-top: 0;
   }
+
   & button {
     margin-top: 35px;
   }
 `
 
-export function RegisterForm() {
+export const RegisterForm = observer(function RegisterForm() {
   const authState = useAuthStore();
   const {t} = useTranslation();
 
@@ -102,4 +105,4 @@ export function RegisterForm() {
       />
     </FormWrapper>
   )
-}
+});

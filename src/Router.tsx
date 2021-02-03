@@ -1,16 +1,13 @@
-import React, {ReactNode, useCallback, useEffect} from 'react';
+import React, {ReactNode, useCallback} from 'react';
+import {observer} from "mobx-react-lite";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom"
-import {useTranslation} from "react-i18next";
-import {reaction} from "mobx";
-import {observer} from "mobx-react";
 
+import {useAuthStore} from "./providers/StoreProvider";
 import {Auth} from "./screens/public/Auth";
 import {Main} from "./screens/protected/Main";
-import {useAuthStore} from "./providers/StoreProvider";
-import {logger} from "./utils/logger";
 import {Register} from "./screens/public/Register";
 import {Forgot} from "./screens/public/Forgot";
-import {useStore} from "./providers/StoreProvider";
+import {logger} from "./utils/logger";
 
 interface ProtectedRouteProps {
   children: ReactNode,
@@ -19,14 +16,14 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = observer(({children, path, exact = false}: ProtectedRouteProps) => {
-  const {isLoggedIn} = useAuthStore();
+  const authStore = useAuthStore();
   const render = useCallback(({location}) => {
-    if (isLoggedIn) {
+    if (authStore.isLoggedIn) {
       return children
     }
     logger.debug(`Access denied: ${path}. Redirect to: /auth`);
     return <Redirect to={{pathname: "/auth", state: {from: location}}}/>
-  }, [isLoggedIn]);
+  }, [authStore.isLoggedIn]);
 
   return (
     <Route
@@ -38,24 +35,6 @@ const ProtectedRoute = observer(({children, path, exact = false}: ProtectedRoute
 });
 
 export function Router() {
-  const store = useStore();
-  const {i18n} = useTranslation();
-
-  useEffect(() => {
-    logger.debug(`App locale: ${store.appStore.locale}`);
-    i18n.changeLanguage(store.appStore.locale)
-  }, [])
-
-  reaction(
-    () => store.appStore.locale,
-    locale => {
-      i18n.changeLanguage(locale).then(() => {
-        logger.debug(`Change locale: ${locale}`);
-      });
-    }
-  );
-
-
   return (
     <BrowserRouter>
       <Switch>

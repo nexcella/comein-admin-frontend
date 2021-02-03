@@ -1,14 +1,14 @@
 import React from "react";
 import {Link, Redirect} from "react-router-dom"
-
 import styled from "astroturf";
+import {observer} from "mobx-react-lite";
 
 import {useAuthStore} from "../../providers/StoreProvider";
 import {Logo} from "../../components/logo/Logo";
 import {AuthForm} from "../../components/auth/AuthForm";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 import {PublicWrapper} from "./PublicWrapper";
-import {observer} from "mobx-react";
+
 
 const FormWrapper = styled.div`
   width: 250px;

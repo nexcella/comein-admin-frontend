@@ -1,13 +1,14 @@
 import React, {useEffect} from "react";
 import {Link, Redirect} from "react-router-dom"
-
 import styled from "astroturf";
+import {observer} from "mobx-react-lite";
 
 import {useAuthStore} from "../../providers/StoreProvider";
 import {Logo} from "../../components/logo/Logo";
 import {GoogleLoginButton} from "../../components/auth/GoogleLoginButton";
 import {RegisterForm} from "../../components/auth/RegisterForm";
 import {PublicWrapper} from "./PublicWrapper";
+
 
 const FormWrapper = styled.div`
   width: 250px;
@@ -35,6 +36,7 @@ const RegisterLink = styled(Link)`
 
 const GoogleLoginWrapper = styled.div`
   margin: 20px 0;
+
   & button {
     width: 100%;
     justify-content: center;
@@ -44,7 +46,7 @@ const Label = styled.span`
   color: #5F5E5E;
 `
 
-export const Register = () => {
+export const Register = observer(function Register() {
   const authState = useAuthStore();
 
   useEffect(() => {
@@ -73,4 +75,4 @@ export const Register = () => {
       </RegisterWrapper>
     </PublicWrapper>
   );
-};
+});

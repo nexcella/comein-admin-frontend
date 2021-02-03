@@ -1,12 +1,19 @@
-import {action, observable} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {config} from "../config/app";
 
-export const AppStoreKey = 'appStore';
-
 export class AppStore {
-  @observable locale: string = config.defaultLocale;
+  locale: string = config.defaultLocale;
+  isStorageLoaded: boolean = false;
 
-  @action setLocale(locale: string) {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setLocale(locale: string) {
     this.locale = locale;
+  }
+
+  storageIsLoaded(isLoaded: boolean) {
+    this.isStorageLoaded = isLoaded;
   }
 }

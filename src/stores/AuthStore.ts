@@ -1,5 +1,6 @@
-import {action, makeObservable, observable, runInAction} from 'mobx';
+import {action, makeAutoObservable, runInAction} from 'mobx';
 import {format, ignore} from "mobx-sync";
+
 import {ApiService} from "../services/api/ApiService";
 import {ERRORS, Profile as ProfileResponse, ROLE, UsernameRegisterDto} from '@nexcella/comein-api';
 
@@ -29,36 +30,34 @@ export type ForgotData = {
 
 export class AuthStore {
   @ignore
-  @observable isLoading = false;
+  isLoading = false;
 
   @ignore
-  @observable error?: string;
+  error?: string;
 
-  @observable isLoggedIn = false;
-
-  @observable successForgotEmail = false
+  isLoggedIn = false;
+  successForgotEmail = false
 
   @format(
     (hash) => hash ? atob(hash) : undefined,
     (token?: string) => token ? btoa(token) : undefined
   )
-  @observable token?: string
+  token?: string
 
   @format(
     (hash) => hash ? atob(hash) : undefined,
     (refreshToken?: string) => refreshToken ? btoa(refreshToken) : undefined
   )
-  @observable refreshToken?: string
 
-  @observable tokenTtl?: Date
-
-  @observable profile?: Profile;
+  refreshToken?: string
+  tokenTtl?: Date
+  profile?: Profile;
 
   @ignore
   private apiService: ApiService;
 
   constructor(apiService: ApiService) {
-    makeObservable(this);
+    makeAutoObservable(this);
     this.apiService = apiService;
   }
 
@@ -112,7 +111,10 @@ export class AuthStore {
         })
       })
       .finally(() => {
-        this.isLoading = false
+        runInAction(() => {
+          this.isLoading = false
+        })
+
       })
   }
 
@@ -121,10 +123,11 @@ export class AuthStore {
     this.isLoading = true;
     this.error = undefined;
     this.apiService.auth.usernameForgot(data)
-      .then((res) => console.debug({res}))
       .finally(() => {
-        this.isLoading = false
-        this.successForgotEmail = true;
+        runInAction(() =>{
+          this.isLoading = false
+          this.successForgotEmail = true;
+        })
       })
   }
 
@@ -140,6 +143,7 @@ export class AuthStore {
     this.isLoading = false;
     this.profile = undefined;
     this.token = undefined;
+    this.refreshToken = undefined;
     // @TODO request logout from service
   }
 
@@ -147,13 +151,14 @@ export class AuthStore {
   getProfile() {
     this.apiService.auth.profile()
       .then((response) => {
-        if ("success" in response) {
-          this.profile = {
-            ...response.success.profile,
-            isAdmin: response.success.profile.roles.includes('admin')
-          };
-
-        }
+        runInAction(() => {
+          if ("success" in response) {
+            this.profile = {
+              ...response.success.profile,
+              isAdmin: response.success.profile.roles.includes('admin')
+            };
+          }
+        })
       })
   }
 

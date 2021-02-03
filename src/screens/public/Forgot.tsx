@@ -1,10 +1,13 @@
 import React, {useEffect} from "react";
-import {PublicWrapper} from "./PublicWrapper";
-import {Logo} from "../../components/logo/Logo";
-import styled from "astroturf";
+import {observer} from "mobx-react-lite";
 import {Link} from "react-router-dom";
+import styled from "astroturf";
+
+import {Logo} from "../../components/logo/Logo";
 import {ForgotForm} from "../../components/auth/ForgotForm";
 import {useAuthStore} from "../../providers/StoreProvider";
+
+import {PublicWrapper} from "./PublicWrapper";
 
 
 const Subtitle = styled.span`
@@ -41,30 +44,32 @@ const PageTitle = styled.div`
   color: #5F5E5E;
 `
 
-export function Forgot() {
-  const authState = useAuthStore();
+export const Forgot = observer(function Forgot() {
+  const authStore = useAuthStore();
 
   useEffect(() => {
-    authState.clear();
-  }, [authState.clear])
+    authStore.clear();
+  }, [authStore.clear])
 
-  return (<PublicWrapper>
-    <div/>
-    <FormWrapper>
-      <Logo/>
-      <Subtitle>личный кабинет организатора</Subtitle>
-      <div>
-        <PageTitle>Забыли пароль?</PageTitle>
-        {!authState.successForgotEmail ? (
-          <ForgotForm/>
-        ) : (
-          <SuccessMessage>Иструкция для восстановления пароля отправлена Вам на почту</SuccessMessage>
-        )
-        }
-      </div>
-    </FormWrapper>
-    <RegisterWrapper>
-      <RegisterLink to='/auth'>Войти в аккаунт</RegisterLink>
-    </RegisterWrapper>
-  </PublicWrapper>)
-}
+  return (
+    <PublicWrapper>
+      <div/>
+      <FormWrapper>
+        <Logo/>
+        <Subtitle>личный кабинет организатора</Subtitle>
+        <div>
+          <PageTitle>Забыли пароль?</PageTitle>
+          {!authStore.successForgotEmail ? (
+            <ForgotForm/>
+          ) : (
+            <SuccessMessage>Иструкция для восстановления пароля отправлена Вам на почту</SuccessMessage>
+          )
+          }
+        </div>
+      </FormWrapper>
+      <RegisterWrapper>
+        <RegisterLink to='/auth'>Войти в аккаунт</RegisterLink>
+      </RegisterWrapper>
+    </PublicWrapper>
+  )
+});

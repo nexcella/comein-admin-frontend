@@ -1,12 +1,13 @@
 import React, {useEffect} from "react";
 import styled from "astroturf";
-import {LogoutButton} from "../../components/auth/LogoutButton";
+import {Route, Switch} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+
 import {useAuthStore} from "../../providers/StoreProvider";
+import {LogoutButton} from "../../components/auth/LogoutButton";
 import {Header} from "../../components/header/Header";
 import {Sidebar} from "../../components/sidebar/Sidebar";
-import {Route, Switch} from "react-router-dom";
 import {NetworkState} from "../../components/network/NetworkState";
-import {observer} from "mobx-react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +22,9 @@ const Content = styled.div`
 export const Main = observer(function Main() {
   const authStore = useAuthStore()
 
-  useEffect(() => authStore.getProfile(), [authStore.getProfile]);
+  useEffect(() => {
+    authStore.getProfile()
+  }, [authStore.getProfile]);
 
   return (
     <>

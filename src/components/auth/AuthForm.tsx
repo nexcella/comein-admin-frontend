@@ -1,14 +1,15 @@
 import React, {useEffect} from "react";
 import styled from "astroturf";
 import {useTranslation} from "react-i18next";
+import {observer} from "mobx-react-lite";
 import {object as yupObject, string as yupString} from 'yup';
+import {useFormik} from "formik";
+
 import {useAuthStore} from "../../providers/StoreProvider";
 import {LoginData} from "../../stores/AuthStore";
-import {useFormik} from "formik";
 import {Input} from "../ui-kit/forms/Input";
 import {Button} from "../ui-kit/Button";
 import {ErrorLabel} from "../error/ErrorLabel";
-import {observer} from "mobx-react";
 
 const FormWrapper = styled.form`
   display: flex;
@@ -23,12 +24,11 @@ const FormWrapper = styled.form`
 `
 
 export const AuthForm = observer(function AuthForm() {
-  const authState = useAuthStore();
   const {t} = useTranslation();
-
+  const authStore = useAuthStore();
   useEffect(() => {
-    authState.clear();
-  }, [authState.clear])
+    authStore.clear();
+  }, [authStore.clear])
 
   const validationSchema = yupObject().shape({
     username: yupString().required(t('validation.required')),
@@ -42,11 +42,11 @@ export const AuthForm = observer(function AuthForm() {
       password: ''
     },
     onSubmit: ({username, password}) => {
-      authState.login({username, password});
+      authStore.login({username, password});
     }
   });
 
-  const isLoading = formik.isSubmitting && authState.isLoading;
+  const isLoading = formik.isSubmitting && authStore.isLoading;
   const isValid = formik.dirty && formik.isValid;
 
   return (
@@ -72,7 +72,7 @@ export const AuthForm = observer(function AuthForm() {
         error={formik.errors.password}
         required
       />
-      {authState.error && <ErrorLabel text={t(`errors.${authState.error}`)}/>}
+      {authStore.error && <ErrorLabel text={t(`errors.${authStore.error}`)}/>}
       <Button
         disabled={!isValid || isLoading}
         pending={isLoading}

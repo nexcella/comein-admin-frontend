@@ -34,5 +34,3 @@ export class ApiService {
     this.transport.setToken(token)
   }
 }
-
-export const apiService = new ApiService();
