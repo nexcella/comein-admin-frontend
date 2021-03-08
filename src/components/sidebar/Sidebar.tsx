@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "astroturf";
-import {Link} from "react-router-dom";
 
 import {useVersion} from "../../providers/VersionProvider";
 import {Loader} from "../ui-kit/Loader";
 import {useNetworkStore} from "../../providers/StoreProvider";
+import {Menu} from "./Menu";
 
 const SidebarContainer = styled.aside`
   width: 290px;
-  min-height: calc(100vh - 100px); 
+  min-height: calc(100vh - 100px);
   float: left;
   margin-top: -50px;
   background: white;
   border-radius: 0 48px 0 0;
-  position:relative;
+  position: relative;
   padding-bottom: 30px;
   color: #c2c2c2
 `
@@ -29,7 +29,7 @@ const VersionContainer = styled.div`
   height: 20px;
   display: flex;
   flex-direction: row;
-  
+
   & > svg {
     position: absolute;
     height: 20px;
@@ -44,28 +44,11 @@ export function Sidebar() {
 
   return (
     <SidebarContainer>
-      Календарь <br/>
-      <Link to='/clients'>
-        <span style={{color: 'black'}}>Клиенты</span><br/>
-      </Link>
-      События<br/>
-      Оплаты
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-    <ul>
-      <li>Программа</li>
-      <li>Инфо</li>
-      <li>Спикеры</li>
-      <li>Участники</li>
-      <li>Карта</li>
-      <li>Партнёры</li>
-    </ul>
-    <VersionContainer>
-      <span>Версия: {version}</span>
-      {networkStore.isLoading && <Loader fill='gray' size='small'/>}
-    </VersionContainer>
-  </SidebarContainer>
+      <Menu/>
+      <VersionContainer>
+        <span>Версия: {version}</span>
+        {networkStore.isLoading && <Loader fill='gray' size='small'/>}
+      </VersionContainer>
+    </SidebarContainer>
   )
 }

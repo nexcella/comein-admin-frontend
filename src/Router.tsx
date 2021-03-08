@@ -8,6 +8,7 @@ import {Main} from "./screens/protected/Main";
 import {Register} from "./screens/public/Register";
 import {Forgot} from "./screens/public/Forgot";
 import {logger} from "./utils/logger";
+import {Projects} from "./screens/protected/projects/Projects";
 
 interface ProtectedRouteProps {
   children: ReactNode,

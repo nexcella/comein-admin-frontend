@@ -19,7 +19,7 @@ const HeaderBackground: StyledComponent<"header", {isAdmin?: boolean}> = styled.
 `
 
 const LogoWrapper = styled.div`
-  width: 290px;
+  width: 240px;
   height: 100px;
   display: flex;
   justify-content: center;

@@ -8,6 +8,7 @@ import {LogoutButton} from "../../components/auth/LogoutButton";
 import {Header} from "../../components/header/Header";
 import {Sidebar} from "../../components/sidebar/Sidebar";
 import {NetworkState} from "../../components/network/NetworkState";
+import {Projects} from "./projects/Projects";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,8 +40,7 @@ export const Main = observer(function Main() {
                 <div>Home</div>
               </>
             )}/>
-            <Route path='/clients' render={() => <div>list of clients</div>}/>
-            <Route path='/create-client' render={() => <div>create client</div>}/>
+            <Route path='/projects' component={Projects}/>
             <Route path='/settings' render={() => <div>
               {authStore.profile?.id}<br/>
               {authStore.profile?.username}<br/>
