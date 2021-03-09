@@ -16,7 +16,8 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   position: relative;
-  padding: 48px 12px 12px;
+  padding: 24px 12px 12px;
+  margin: 24px 0 0 12px;
   width: 100%;
 `
 

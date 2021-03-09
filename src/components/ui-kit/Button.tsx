@@ -4,23 +4,24 @@ import {Loader} from "./Loader";
 import {Link} from "react-router-dom";
 
 const ButtonComponent = styled.button`
-  background: #4FACFE;
+  background: var(--primary-color);
   border: none;
   font-size: 16px;
   color: white;
   height: 40px;
   line-height: 40px;
   border-radius: 4px;
+  padding: 0 12px;
   outline: none;
 
   &:focus {
-    border: 1px solid #339FFF;
-    background-color: #45A5F9;
-    box-shadow: 0 0 1px 1px #45A5F9;
+    border: 1px solid var(--primary-color);
+    background-color: var(--support-color);
+    box-shadow: 0 0 1px 1px var(--support-color);
   }
 
   &:active {
-    background-color: #339FFF;
+    background-color: var(--primary-color);
   }
 
   &:disabled {
@@ -35,6 +36,7 @@ const ButtonComponent = styled.button`
 
 type ButtonProps = {
   text: string,
+  onClick?: () => void,
   disabled?: boolean,
   pending?: boolean,
   type?: 'submit',
@@ -43,10 +45,12 @@ type ButtonProps = {
 
 export function Button(
   {
+    onClick,
     text = '',
     type = 'submit',
     disabled = false,
-    pending = false,
+    pending = false
+,
     to
   }: ButtonProps
 ) {
@@ -54,7 +58,7 @@ export function Button(
     return <Link to={to}>{text}</Link>
   }
   return (
-    <ButtonComponent type={type} disabled={disabled}>
+    <ButtonComponent type={type} disabled={disabled} onClick={onClick}>
       {pending ? <Loader size='small' fill={'#8c99a8'}/> : text}
     </ButtonComponent>
   )

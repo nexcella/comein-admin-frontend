@@ -34,7 +34,7 @@ const ErrorWrapper = styled.div`
 
 type InputProps = {
   name: string
-  placeholder: string
+  placeholder?: string
   autocomplete?: string
   type?: 'text' | 'password',
   onChange: (e: ChangeEvent) => void
@@ -47,9 +47,9 @@ type InputProps = {
 
 export function Input(
   {
-    placeholder,
     name,
     autocomplete,
+    placeholder = '',
     type = 'text',
     onChange,
     onBlur,
