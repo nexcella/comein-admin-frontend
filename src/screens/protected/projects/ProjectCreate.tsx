@@ -136,7 +136,7 @@ type CreateProjectData = {
   projectType: ProjectType,
   options: Map<string, boolean>,
   modules: Map<string, boolean>,
-  color?: Color,
+  color?: RGBColor,
 };
 
 const projectTypes: ProjectType[] = [
