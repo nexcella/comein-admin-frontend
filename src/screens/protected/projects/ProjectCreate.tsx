@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import styled, {StyledComponent} from "astroturf";
-import {CirclePicker, RGBColor} from 'react-color';
+import {CirclePicker, Color} from 'react-color';
 import {useFormik} from "formik";
 import {object as yupObject, string as yupString} from "yup";
 import {useTranslation} from "react-i18next";
@@ -136,7 +136,7 @@ type CreateProjectData = {
   projectType: ProjectType,
   options: Map<string, boolean>,
   modules: Map<string, boolean>,
-  color?: RGBColor,
+  color?: Color,
 };
 
 const projectTypes: ProjectType[] = [
