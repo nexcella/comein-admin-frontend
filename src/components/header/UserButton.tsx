@@ -21,7 +21,7 @@ const Button = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 14px 0 10px;
 `
 
 const AvatarPlaceholder = styled.div`
@@ -36,6 +36,11 @@ const AvatarPlaceholder = styled.div`
   color: black;
 `
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black
+`;
+
 const UsernameWrapper = styled.span`
   margin-left: 12px;
 `
@@ -44,12 +49,12 @@ export function UserButton() {
   const {profile} = useAuthStore();
   return (
     <UserButtonWrapper>
-      <Link to='/settings'>
+      <StyledLink to='/settings'>
         <Button>
           <AvatarPlaceholder>{profile?.username[0]}</AvatarPlaceholder>
           <UsernameWrapper>Настройки аккаунта</UsernameWrapper>
         </Button>
-      </Link>
+      </StyledLink>
     </UserButtonWrapper>
   )
 }

@@ -33,6 +33,9 @@ const ButtonComponent = styled.button`
     height: 30px;
   }
 `
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 type ButtonProps = {
   text: string,
@@ -55,7 +58,7 @@ export function Button(
   }: ButtonProps
 ) {
   if (to && text) {
-    return <Link to={to}>{text}</Link>
+    return <StyledLink to={to}>{text}</StyledLink>
   }
   return (
     <ButtonComponent type={type} disabled={disabled} onClick={onClick}>
