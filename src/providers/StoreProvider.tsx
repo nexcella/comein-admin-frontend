@@ -11,6 +11,7 @@ import {AuthStore} from "../stores/AuthStore";
 import {AppStore} from "../stores/AppStore";
 import {NetworkStore} from "../stores/NetworkStore";
 import {logger} from "../utils/logger";
+import {ProjectsStore} from "../stores/ProjectsStore";
 
 const transport = new XHRTransport();
 const networkService = new NetworkService(transport);
@@ -19,6 +20,7 @@ const apiService = new ApiService();
 export type Stores = {
   auth: AuthStore,
   app: AppStore,
+  projects: ProjectsStore,
   network: NetworkStore
 };
 
@@ -52,6 +54,11 @@ export function useAuthStore() {
   return stores.auth;
 }
 
+export function useProjectsStore() {
+  const stores = useStores();
+  return stores.projects;
+}
+
 export function useAppStore() {
   const stores = useStores();
   return stores.app;
@@ -62,9 +69,10 @@ export function useNetworkStore() {
   return stores.network;
 }
 
-function getInitialStores() {
+function getInitialStores(): Stores {
 
   const authStore = new AuthStore(apiService);
+  const projectsStore = new ProjectsStore(apiService);
   const networkStore = new NetworkStore();
   const appStore = new AppStore();
 
@@ -89,7 +97,7 @@ function getInitialStores() {
     }
   })
 
-  return {auth: authStore, network: networkStore, app: appStore}
+  return {auth: authStore, network: networkStore, app: appStore, projects: projectsStore}
 }
 
 async function initStorage(stores: Stores) {

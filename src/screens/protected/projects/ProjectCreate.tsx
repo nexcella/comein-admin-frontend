@@ -4,9 +4,12 @@ import {CirclePicker, Color} from 'react-color';
 import {useFormik} from "formik";
 import {object as yupObject, string as yupString} from "yup";
 import {useTranslation} from "react-i18next";
+import DatePicker from "react-datepicker";
 
 import {Input} from "../../../components/ui-kit/forms/Input";
 import {Button} from "../../../components/ui-kit/Button";
+import {observer} from "mobx-react-lite";
+import {useProjectsStore} from "../../../providers/StoreProvider";
 
 
 // ui
@@ -15,22 +18,32 @@ const CheckboxContainer: StyledComponent<'span', { active: boolean }> = styled.s
   min-width: 16px;
   width: 16px;
   height: 16px;
+  margin-right: 8px;
   background: lightgrey;
   border: 1px solid darkgray;
   border-radius: 50%;
   opacity: 0.3;
-  cursor: pointer;
   display: block;
   float: left;
+
   &.active {
     opacity: 1;
     background: var(--primary-color);
     border: 1px solid var(--support-color);
   }
+
   &:hover {
     box-shadow: 0 0 2px 0 var(--primary-color);
   }
 `
+
+const CheckboxWrapper = styled.div`
+  white-space: nowrap;
+  margin-bottom: 4px;
+  cursor: pointer;
+  user-select: none;
+`
+
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -41,9 +54,11 @@ const SelectOption: StyledComponent<"div", { selected?: boolean }> = styled.div`
   border-radius: 8px;
   color: #434343;
   cursor: pointer;
+
   &:last-child {
     margin-left: 6px;
   }
+
   &.selected {
     cursor: default;
     background: var(--support-color);
@@ -51,26 +66,34 @@ const SelectOption: StyledComponent<"div", { selected?: boolean }> = styled.div`
   }
 `
 
-const FieldGroup = styled.div`
+const FieldGroup: StyledComponent<"div", { column?: boolean }> = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 18px;
+
+  &.column {
+    flex-direction: column;
+  }
+
   & > label {
     margin-right: 12px;
     width: 135px;
     color: #434343
   }
+
   & > div {
     width: 100%;
   }
+
   & input {
-     margin-top: 0;
+    margin-top: 0;
   }
+
   & > span {
     color: #434343
   }
-  
+
   & > ${CheckboxContainer} {
     margin-right: 12px;
   }
@@ -87,22 +110,22 @@ const ContentWrapper = styled.div`
   background: white;
   border-radius: 8px;
   padding: 24px;
-  &:first-child {
-    min-width: 70%;
+
+  & > h3 {
+    white-space: nowrap;
   }
+
   &:last-child {
     margin-left: 24px;
   }
 `
 
-const ModulesWrapper = styled.div`
-  min-height: 150px;
-`
-
-
-export function Checkbox({active, onClick}) {
+export function Checkbox({active, onClick, text}) {
   return (
-    <CheckboxContainer active={active} onClick={onClick}/>
+    <CheckboxWrapper onClick={onClick}>
+      <CheckboxContainer active={active}/>
+      {text}
+    </CheckboxWrapper>
   )
 }
 
@@ -144,9 +167,9 @@ const projectTypes: ProjectType[] = [
   {key: 'online-marathon', name: 'Онлайн-марафон'}
 ]
 
-export function ProjectCreateScreen() {
+export const ProjectCreateScreen = observer(function ProjectCreateScreen() {
   const {t} = useTranslation();
-
+  const projectsStore = useProjectsStore();
   const validationSchema = yupObject().shape({
     title: yupString().required(t('validation.required')),
   });
@@ -161,7 +184,7 @@ export function ProjectCreateScreen() {
       modules: new Map<string, boolean>(),
     },
     onSubmit: (data) => {
-      console.debug({data})
+      projectsStore.createProject(data);
     }
   });
 
@@ -190,8 +213,8 @@ export function ProjectCreateScreen() {
       <h1>Создание нового проекта</h1>
       <form onSubmit={formik.handleSubmit}>
         <CreateProjectWrapper>
-
           <ContentWrapper>
+            <h3>Основная информация</h3>
             <FieldGroup>
               <label>Название</label>
               <div>
@@ -213,48 +236,53 @@ export function ProjectCreateScreen() {
               />
             </FieldGroup>
             <FieldGroup>
+              <DatePicker onChange={date => console.debug(date)} />
+            </FieldGroup>
+            <FieldGroup column={true}>
               <Checkbox
                 active={formik.values.options.has('isPublic')}
                 onClick={() => handleOptionChange('isPublic')}
+                text='Показывать это мероприятие в общем списке'
               />
-              <span>Показывать это мероприятие в общем списке</span>
-            </FieldGroup>
-            <FieldGroup>
               <Checkbox
                 active={formik.values.options.has('withoutModeration')}
                 onClick={() => handleOptionChange('withoutModeration')}
+                text='Участники добавляются в проект сами, не дожидаясь моего одбрения'
               />
-              <span>Участники добавляются в проект сами, не дожидаясь моего одбрения</span>
-            </FieldGroup>
-            <FieldGroup>
               <Checkbox
                 active={formik.values.options.has('withoutRegistration')}
                 onClick={() => handleOptionChange('withoutRegistration')}
+                text='Позволить использовать приложение без регистрации'
               />
-              <span>Позволить использовать приложение без регистрации</span>
             </FieldGroup>
-
             <FieldGroup>
               <label>Цвет мероприятия</label>
               <CirclePicker
-                onChange={(color) => {formik.setFieldValue('color', color)}}
+                onChange={(color) => {
+                  formik.setFieldValue('color', color)
+                }}
                 color={formik.values.color}
                 circleSize={22}
-                colors={['#2BC4E7', '#FFDC35', '#FF1A1A', '#3C37FB', '#434343', '#4DD416', ]}
+                colors={['#2BC4E7', '#FFDC35', '#FF1A1A', '#3C37FB', '#434343', '#4DD416',]}
               />
             </FieldGroup>
             <Button text='Создать проект'/>
           </ContentWrapper>
           <ContentWrapper>
-            <ModulesWrapper>
-              <Checkbox
-                active={formik.values.modules.has('feed')}
-                onClick={() => handleModulesChange('feed')}
-              /> лента<br/>
-            </ModulesWrapper>
+            <h3>Разделы приложения</h3>
+            <Checkbox
+              active={formik.values.modules.has('feed')}
+              onClick={() => handleModulesChange('feed')}
+              text='лента'
+            />
+            <Checkbox
+              active={formik.values.modules.has('info')}
+              onClick={() => handleModulesChange('info')}
+              text='информация'
+            />
           </ContentWrapper>
         </CreateProjectWrapper>
       </form>
     </>
   )
-}
+});

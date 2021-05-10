@@ -3,14 +3,16 @@ import {ErrorData} from "@nexcella/comein-api";
 import {AuthService} from "./AuthService";
 import {XHRTransport} from "../network/transport/XHRTransport";
 import {logger} from "../../utils/logger";
+import {ProjectsService} from "./ProjectsService";
 
 export class ApiService {
   public auth: AuthService;
-
+  public projects
   private transport = new XHRTransport();
 
   constructor() {
     this.auth = new AuthService(this.transport);
+    this.projects = new ProjectsService(this.transport);
   }
 
   public setOnRequestCallback(callback: (requestId: string,) => void) {

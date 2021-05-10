@@ -1,4 +1,4 @@
-body, input, button {
+html body * {
   font-family: 'Roboto Condensed', 'Arial',sans-serif;
 }
 
@@ -6,7 +6,10 @@ h1 {
   font-size: 150%;
   margin-bottom: 12px;
 }
-
+h3 {
+  font-size: 110%;
+  margin-bottom: 8px;
+}
 :root {
   --primary-color: #1DB5D8;
   --support-color: #46D4DA;

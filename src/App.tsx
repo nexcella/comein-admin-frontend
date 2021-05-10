@@ -12,6 +12,7 @@ import {StoreProvider, useApiService, useAppStore, useAuthStore} from "./provide
 import {Router} from "./Router";
 
 import './i18n';
+import "react-datepicker/dist/react-datepicker.css";
 
 const styles = css`
   @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&display=swap&subset=cyrillic,cyrillic-ext');
